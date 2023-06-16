@@ -1,11 +1,11 @@
 id: spiderfoot
-title: 'SpiderFoot - OSINT Automation Tool'
+title: SpiderFoot - OSINT Automation Tool
 tags: 
   - osint
   - automation
   - threat-intelligence
   - attack-surface-mapping
   - open-source
-description: 'SpiderFoot is an open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis, making that data easy to navigate. SpiderFoot has an embedded web-server for providing a clean and intuitive web-based interface but can also be used completely via the command-line. It is written in Python 3 and is MIT-licensed.'
+description: SpiderFoot is an open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis, making that data easy to navigate. SpiderFoot has an embedded web-server for providing a clean and intuitive web-based interface but can also be used completely via the command-line. It is written in Python 3 and is MIT-licensed.
 references: 
   - https://github.com/smicallef/spiderfoot

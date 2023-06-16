@@ -1,10 +1,10 @@
 id: social-analyzer
-title: 'Social Analyzer - Fast, Reliable and Easy to Use Tool for Social Media and Websites Analysis'
+title: Social Analyzer - Fast, Reliable and Easy to Use Tool for Social Media and Websites Analysis
 tags:
   - pentest
   - social-media
   - website-analysis
   - open-source
-description: 'Social Analyzer is a fast, reliable, and easy-to-use tool for social media and websites analysis. It is designed to help users analyze and find a person's profile across +300 social media websites, forums, dating apps, and other platforms.'
+description: Social Analyzer is a fast, reliable, and easy-to-use tool for social media and websites analysis. It is designed to help users analyze and find a person's profile across +300 social media websites, forums, dating apps, and other platforms.
 references:
   - https://github.com/qeeqbox/social-analyzer
