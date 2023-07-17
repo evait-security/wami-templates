@@ -1,0 +1,30 @@
+id: killer-tool
+title: Killer Tool (EDR Evasion) - An AV/EDR Evasion tool.
+tags:
+  - pentest
+  - python-based
+  - bypass
+  - security
+  - av
+  - evasion
+  - edr
+  - iat-hiding
+  - obfuscation
+  - api-unhooking
+  - dll-unhooking
+  - fresh-ntdll
+  - sandbox-evasion
+  - anti-debuggin
+  - shellcode-revesed
+  - encrypted
+  - hallowed-memory
+  - get-proc-address
+  - get-module-handle
+description: It's a AV/EDR Evasion tool created to bypass security tools for learning, until now the tool is FUD.
+references:
+  - https://github.com/0xHossam/Killer
+  - https://medium.com/@0xHossam/av-edr-evasion-malware-development-933e50f47af5
+  - https://medium.com/@0xHossam/av-edr-evasion-malware-development-p2-7a947f7db354
+  - https://medium.com/@0xHossam/unhooking-memory-object-hiding-3229b75618f7
+  - https://medium.com/@0xHossam/av-edr-evasion-malware-development-p-4-162662bb630e
+  - https://github.com/abdallah-elsharif
