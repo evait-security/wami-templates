@@ -1,0 +1,12 @@
+id: chntpw
+title: chntpw - Offline NT Password & Registry Editor
+tags:
+  - pentest
+  - forensics
+  - password-editor
+  - registry-editor
+  - windos
+  - nt
+description: Chntpw (also known as Offline NT Password & Registry Editor) is a small Windows password removal utility that can run from a CD or USB drive.
+references:
+  - http://www.chntpw.com/guide/
