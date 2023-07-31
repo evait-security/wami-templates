@@ -1,6 +1,7 @@
 id: adape-script
 title: Active Directory Assessment and Privilege Escalation
 tags:
+  - windows
   - script
   - wpad-spoofing
   - llmnr-spoofing
