@@ -1,0 +1,10 @@
+id: abcd
+title: abcd - ActionScript Byte Code Disassembler
+tags:
+  - actionscript
+  - byte-code
+  - disassembler
+  - python
+description: ActionScript Byte Code Disassembler
+references:
+  - https://github.com/MITRECND/abcd
