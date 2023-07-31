@@ -1,0 +1,12 @@
+id: qregedit
+title: qregedit - Windows registry editor written with Qt,based on chntpw code.
+tags:
+  - Windows
+  - regedit
+  - registry
+  - editor
+  - qt
+  - chntpw
+description: Windows registry editor written with Qt, based on chntpw code.
+references:
+  - https://github.com/kernel1024/qregedit
