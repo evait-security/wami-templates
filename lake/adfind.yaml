@@ -1,0 +1,11 @@
+id: adfind
+title: adfind - Admin Panel Finder
+tags:
+  - pentest
+  - admin-panel
+  - search
+  - php
+  - curl
+description: Admin Panel Finder, is used to find administrative panels in an php server.
+references:
+  - https://github.com/sahakkhotsanyan/adfind
