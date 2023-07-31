@@ -1,0 +1,21 @@
+id: adape-script
+title: Active Directory Assessment and Privilege Escalation
+tags:
+  - script
+  - wpad-spoofing
+  - llmnr-spoofing
+  - nbt-ns-spoofing
+  - gpp-password
+  - ms14-025
+  - kerberoast
+  - bloodhound
+  - privilege-escalation
+  - smb-shares
+  - sensitive-string-search
+  - patch-checker
+  - search-file-server
+  - gather-domain-policy
+  - github
+description: I take absolutely no credit for the modules used in this script. Thanks to the original authors for the modules used in this script, credits and links below. Let's be honest, this is not a red team script. If you're worried about opsec, this script is not for you as it is loud. If you don't want to mess with the hassel of downloading multiple scripts during a pentest or risk assessment, then this might just be for you. In my previous engagements and assessments, I would run a few Powershell scripts that help identify next targets, check for bad group policy settings, AD misconfigs, missing patches, etc. This script combines the ones I used routinely and autoruns the functions I use in those scripts, outputting the results into a zip file.
+references:
+  - https://github.com/hausec/ADAPE-Script
