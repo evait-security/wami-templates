@@ -1,0 +1,14 @@
+id: air
+title: air - Automated Image and Restore
+tags:
+  - forensic
+  - dd
+  - dc-3dd
+  - disk-image
+  - partition image
+  - md5
+  - shax-hashes
+  - scsi-tape
+description: AIR (Automated Image & Restore) is a GUI front-end to dd/dc3dd designed for easily creating forensic disk/partition images. Supports MD5/SHAx hashes, SCSI tape drives, imaging over a TCP/IP network, splitting images, and detailed session logging.
+references:
+  - https://sourceforge.net/projects/air-imager/
