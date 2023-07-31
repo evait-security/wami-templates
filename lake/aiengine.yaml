@@ -1,0 +1,73 @@
+id: aiengine
+title: AI Engine (Artificial Intelligent Engine)
+tags:
+  - python
+  - ruby
+  - java
+  - lua
+  - go
+  - intrusion-detection
+  - nids
+  - firewalls
+  - traffic
+  - prcre-jit
+  - regex-graphs
+  - sets-and-bloom-filters
+  - linux
+  - freebsd
+  - macos
+  - x86-64
+  - arm
+  - mips
+  - banned-domains
+  - host http
+  - host dns
+  - host smtp
+  - host ssl
+  - auto-report
+  - yara-signatures
+  - mysql
+  - redis
+  - cassandra
+  - hadoop
+  - netfilter
+  - ddos
+  - rejecting tcp-udp
+  - network-forensics
+  - ja3-tls-signatures-on-ssl
+  - coap
+  - dhcpv4
+  - dhcpv6
+  - dns
+  - dtls
+  - gprs
+  - gre
+  - http
+  - icmpv4
+  - icmpv6
+  - imap
+  - ipv4
+  - ipv6
+  - modbus
+  - mpls
+  - mqtt
+  - netbios
+  - ntp
+  - openflow
+  - pppoe
+  - pop
+  - quic
+  - rtp
+  - sip
+  - smb
+  - smtp
+  - ssdp
+  - ssh
+  - ssl
+  - tcp
+  - udp
+  - vlan
+  - vxlan
+description: AIEngine is a next generation interactive/programmable Python/Ruby/Java/Lua and Go network intrusion detection system engine with capabilities of learning without any human intervention, DNS domain classification, Spam detection, network collector, network forensics and many others. AIEngine also helps network/security professionals to identify traffic and develop signatures for use them on NIDS, Firewalls, Traffic classifiers and so on.
+references:
+  - https://bitbucket.org/camp0/aiengine/src/master/
