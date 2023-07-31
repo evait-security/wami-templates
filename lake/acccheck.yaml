@@ -1,0 +1,11 @@
+id: acccheck
+title: acccheck - A SMB password dictionary attack tool.
+tags:
+  - smb
+  - dictionary
+  - attack-tool
+  - password
+description: The tool is designed as a password dictionary attack tool that targets windows authentication via the SMB protocol. It is really a wrapper script around the smbclient binary, and as a result is dependent on it for its execution.
+references:
+  - https://labs.portcullis.co.uk/tools/acccheck/
+  - https://labs.portcullis.co.uk/download/acccheck-0-2-1.tar.gz
