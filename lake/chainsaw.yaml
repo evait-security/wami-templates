@@ -1,0 +1,24 @@
+id: chainsaw
+title: Chainsaw - Rapidly search and hunt through Windows forensic artefacts.
+tags:
+  - forensic
+  - hunt
+  - search
+  - sigma
+  - regex-patterns
+  - string-matching
+  - evtx-parser
+  - document-tagging
+  - execution-timeline
+  - shimcasche
+  - amcache-data
+  - output-ascii-table
+  - output-csv
+  - output-json
+  - linux
+  - windows
+  - mac
+  - first-response
+description: Chainsaw provides a powerful first-response capability to quickly identify threats within Windows forensic artefacts such as Event Logs and MFTs. Chainsaw offers a generic and fast method of searching through event logs for keywords, and by identifying threats using built-in support for Sigma detection rules, and via custom Chainsaw detection rules.
+references:
+  - https://github.com/WithSecureLabs/chainsaw
