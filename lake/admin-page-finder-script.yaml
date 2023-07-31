@@ -1,0 +1,12 @@
+id: admin-page-finder-script 
+title: Admin Page Finder Script
+tags:
+  - php
+  - admin-page
+  - script
+  - pentest
+  - search
+description: This python script looks for a large amount of possible administrative interfaces on a given site.
+references:
+  - https://packetstormsecurity.com/files/112855/Admin-Page-Finder-Script.html
+  - https://dl.packetstormsecurity.net/UNIX/utilities/AdminpageFinder.py.txt
