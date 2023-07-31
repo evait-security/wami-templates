@@ -1,0 +1,33 @@
+id: 3proxy
+title: 3proxy - 3Proxy tiny cross-platform freeware proxy servers
+tags:
+  - proxy
+  - tiny
+  - cross-platform
+  - win
+  - linux
+  - http
+  - https
+  - ftp
+  - socksv4
+  - socksv4.5
+  - socksv5
+  - pop3
+  - smtp
+  - aim-icq
+  - msn
+  - dns
+  - tcp
+  - udp
+  - access-control
+  - bandwidth-limiting
+  - traffic-limiting
+  - proxy-chaining
+  - log-rotation
+  - syslog
+  - odbc-logging
+description: 3Proxy tiny free proxy server is really tiny cross-platform (Win32/Win64&Unix) freeware proxy servers set. It includes HTTP proxy with HTTPS and FTP support, SOCKSv4/SOCKSv4.5/SOCKSv5 proxy (socks/socks.exe), POP3 proxy, SMTP proxy, AIM/ICQ proxy (icqpr/icqpr.exe), MSN messenger / Live messenger proxy (msnpr/msnpr.exe), FTP proxy, caching DNS proxy, TCP and UDP portmappers. You can use every proxy as a standalone program (socks, proxy, tcppm, udppm, pop3p) or use combined program (3proxy). Combined proxy additionally supports features like access control, bandwidth limiting, limiting daily/weekly/monthly traffic amount, proxy chaining, log rotation, syslog and ODBC logging, etc.
+references:
+  - https://3proxy.ru/
+  - https://3proxy.ru/download/
+  - https://github.com/3proxy/3proxy
