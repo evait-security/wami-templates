@@ -1,0 +1,21 @@
+id: airgeddon
+title: airgeddon - a multi-use bash script for linux systems to audit wireless networks.
+tags:
+  - dos-mdk3
+  - dos-mdk4
+  - dos-aireplay-ng
+  - dos-pursuit-mode
+  - evil-twin-attacks
+  - wifi-2-4-ghz
+  - wifi-5-ghz
+  - capturing-handshake
+  - capturing-pmkid
+  - offline-password-decryption
+  - dictionary-bruteforce
+  - tools-john-the-ripper
+  - tools-asleap
+  - tools-hashcat
+  - online-wpa3-dictionary-attack
+description: This is a multi-use bash script for Linux systems to audit wireless networks.
+references:
+  - https://github.com/v1s1t0r1sh3r3/airgeddon
