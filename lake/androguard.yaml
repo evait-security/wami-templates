@@ -1,0 +1,16 @@
+id: androguard
+title: Androguard - Reverse engineering of Android APKs.
+tags:
+  - reverse-engineering
+  - android
+  - disassembler
+  - dex
+  - odex
+  - apk
+  - binary-xml
+  - frida
+  - sqlite
+description: Reverse engineering, Malware and goodware analysis of Android applications and more.
+references:
+  - https://github.com/androguard/androguard
+  - https://github.com/androguard/androguard/wiki
