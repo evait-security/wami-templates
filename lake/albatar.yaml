@@ -1,0 +1,18 @@
+id: albatar
+title: Albatar - Tool to exploit SQL injection vulnerabilities.
+tags:
+  - sql
+  - injection
+  - exploit
+  - sqlmap
+  - python
+  - mysql
+  - mssql
+  - oracle
+  - union
+  - error
+  - boolean
+  - time
+description: I wrote Albatar to have a neat and tidy tool to exploit SQL injection vulnerabilities. Unlike sqlmap, Albatar will not detect SQL injection vulnerabilities, it is primarily designed to help exploit not-so-straightforward injections where sqlmap would need tweaking and patching to work. Albatar is a framework in Python. As a result, you need to write some Python code to be able to exploit the SQLI. Then simply invoke your script by passing sqlmap-like command line options (like --dbs, --banner etc.) to retrieve data from the database. Currently, Albatar supports MySQL, MSSQL and Oracle with the Union, Error, Boolean and Time techniques.
+references:
+  - https://github.com/lanjelot/albatar/tree/4e63f22c942b49e5a04355cc05697d67b3f71266
