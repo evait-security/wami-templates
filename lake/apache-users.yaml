@@ -1,0 +1,11 @@
+id: apache-users
+title: Apache Users
+tags:
+  - enumerate
+  - users
+  - apache
+  - perl
+  - userDir
+description: This perl script will enumerate the usernames on a unix system that use the apache module UserDir.
+references:
+  - https://labs.portcullis.co.uk/download/apache_users-2.1.tar.gz
