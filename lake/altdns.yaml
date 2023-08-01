@@ -1,0 +1,13 @@
+id: altdns
+title: Altdns - Subdomain discovery through alterations and permutations.
+tags:
+  - dns
+  - subdomain
+  - discovery
+  - alterations
+  - permutations
+  - dns-recon
+description: Altdns is a DNS recon tool that allows for the discovery of subdomains that conform to patterns. Altdns takes in words that could be present in subdomains under a domain (such as test, dev, staging) as well as takes in a list of subdomains that you know of. From these two lists that are provided as input to altdns, the tool then generates a massive output of "altered" or "mutated" potential subdomains that could be present. It saves this output so that it can then be used by your favourite DNS bruteforcing tool. Alternatively, the -r flag can be passed to altdns so that once this output is generated, the tool can then resolve these subdomains (multi-threaded) and save the results to a file. Altdns works best with large datasets. Having an initial dataset of 200 or more subdomains should churn out some valid subdomains via the alterations generated.
+references:
+  - https://github.com/infosec-au/altdns
+  - https://docs.google.com/presentation/d/1PCnjzCeklOeGMoWiE2IUzlRGOBxNp8K5hLQuvBNzrFY/
