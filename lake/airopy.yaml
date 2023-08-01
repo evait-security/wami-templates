@@ -1,0 +1,10 @@
+id: airopy
+title: airopy - Wireless Packet Capture
+tags:
+  - mac-filter
+  - get-wlan-clients
+  - get-access-points
+  - python
+description: Get clients and access points. With Alfa cards this script works correctly.
+references:
+  - https://github.com/Josue87/Airopy
