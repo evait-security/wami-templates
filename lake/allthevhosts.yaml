@@ -1,0 +1,12 @@
+id: allthevhosts
+title: All the vhost
+tags:
+  - vhosts
+  - pentest
+  - enumerate
+  - bing
+  - yougetsignals
+  - ssl-certificate
+description: There are a number of ways to own a webapp. In a shared environment, an attacker can enumerate all the applications accessible and target the weakest one to root the server and with it all the webapps on the box. To try and emulate this approach on a pentest, we have to find ALL THE VHOSTS. This natty python 2 script scrapes a series of web applications (including bing and yougetsignal’s database) and looks at Subject Alternative Names in the SSL certificate to find as many web applications which resolve to an IP address as possible. No guarantees are made as to the completeness or accuracy of the data, but it’s the best we can do. It can give an insight into the attack surface associated with a given IP address, allowing testers to advise client in situations where the risk is out of their control.
+references:
+  - https://labs.portcullis.co.uk/tools/finding-all-the-vhosts/
