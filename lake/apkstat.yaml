@@ -1,0 +1,10 @@
+id: apkstat
+title: APKStat - Automated Information Retrieval from APKs for initial analysis.
+tags:
+  - actionscript
+  - byte-code
+  - disassembler
+  - python
+description: Save time during your initial analysis of an Android APK file. APK Stat will grab most of the information you need in your initial assessment right away and output the information in an easy to read set of text files. APK Stat - Automated Information Retrieval From APKs For Initial Analysis APK Stat will use APK Tool to decompress and decode your APK file. APK Stat Will Breaks Permissions, Activities, Activity Aliases, Services, Providers and Receivers Into Easily Readable Groups, Scours All Files After Decoding For Hardcoded IP Addresses and Domain Names, Single Out The Launcher Activity and Automatically Creates a Strings.txt file
+references:
+  - https://github.com/hexabin/APKStat
