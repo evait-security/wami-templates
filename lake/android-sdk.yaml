@@ -1,0 +1,9 @@
+id: android-sdk
+title: Android SDK - Google Android SDK
+tags:
+  - android
+  - sdk
+  - google
+description: Android Software developer kit from Google. 
+references:
+  - https://developer.android.com/studio
