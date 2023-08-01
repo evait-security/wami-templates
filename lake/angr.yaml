@@ -1,0 +1,11 @@
+id: angr
+title: angr - platform-agnostic binary analysis framework.
+tags:
+  - symbolic-execution
+  - disassembler
+  - control-flow-analysis
+  - data-dependency-analysis
+  - decompilation
+description: angr is a platform-agnostic binary analysis framework. It is brought to you by the Computer Security Lab at UC Santa Barbara, SEFCOM at Arizona State University, their associated CTF team, Shellphish, the open source community, and @rhelmot.
+references:
+  - https://github.com/angr/angr
