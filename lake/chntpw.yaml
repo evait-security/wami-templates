@@ -9,4 +9,5 @@ tags:
   - nt
 description: Chntpw (also known as Offline NT Password & Registry Editor) is a small Windows password removal utility that can run from a CD or USB drive.
 references:
-  - http://www.chntpw.com/guide/
+  - http://www.chntpw.com/guide/\nwhy_not:
+  -

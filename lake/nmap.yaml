@@ -9,4 +9,5 @@ tags:
   - open-source
 description: Nmap is the go-to tool for reconnaissance. It can quickly scan large networks and runs on all major OSes. It reports on the availability of hosts on the network, the services they are running, the OS versions they are running, the type of packet filter and firewalls in use, and other useful intelligence needed prior to launching an attack.'
 references:
-  - https://github.com/nmap/nmap
+  - https://github.com/nmap/nmap\nwhy_not:
+  -

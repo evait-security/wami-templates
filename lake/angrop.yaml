@@ -6,4 +6,5 @@ tags:
   - python
 description: angrop is a tool to automatically generate rop chains. It is built on top of angr's symbolic execution engine, and uses constraint solving for generating chains and understanding the effects of gadgets. angrop should support all the architectures supported by angr, although more testing needs to be done. Typically, it can generate rop chains (especially long chains) faster than humans. It includes functions to generate chains which are commonly used in exploitation and CTF's, such as setting registers, and calling functions.
 references:
-  - https://github.com/angr/angrop
+  - https://github.com/angr/angrop\nwhy_not:
+  -

@@ -6,4 +6,5 @@ tags:
   - google
 description: Android Software developer kit from Google. 
 references:
-  - https://developer.android.com/studio
+  - https://developer.android.com/studio\nwhy_not:
+  -

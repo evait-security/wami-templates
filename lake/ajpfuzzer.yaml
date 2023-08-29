@@ -10,4 +10,5 @@ tags:
   - j2ee-containers
 description: AJPFuzzer is a rudimental fuzzer for the Apache JServ Protocol (ajp13). Built on top of libajp13, the tool allows you to create and send AJP messages using an easy-to-use command line interface. AJPFuzzer can craft properly formatted AJP13 messages (all message types) as well as mutations (e.g. bit flipping, messages with type mismatch, etc.), which facilitates security testing efforts targeting AJP-based services like web servers AJP modules, J2EE containers, and many others.
 references:
-  - https://github.com/doyensec/ajpfuzzer
+  - https://github.com/doyensec/ajpfuzzer\nwhy_not:
+  -

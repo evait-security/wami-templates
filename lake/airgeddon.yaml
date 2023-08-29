@@ -18,4 +18,5 @@ tags:
   - online-wpa3-dictionary-attack
 description: This is a multi-use bash script for Linux systems to audit wireless networks.
 references:
-  - https://github.com/v1s1t0r1sh3r3/airgeddon
+  - https://github.com/v1s1t0r1sh3r3/airgeddon\nwhy_not:
+  -
