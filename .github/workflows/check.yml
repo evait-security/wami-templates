@@ -1,0 +1,30 @@
+name: Yaml Check
+
+on:
+  push:
+    branches:
+      - main
+
+env: 
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check_Why_Not
+      run: for file in $(realpath lake/*); do if grep "why_not:" $file; then echo "found why not"; else echo "did not find why not"; echo "\nwhy_not:" >> $file; echo "  -" >> $file; fi; done;
+      env: 
+        ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "tb@evait.de"
+        git config --global user.name "NxtTAB"
+        git add lake/*
+        git commit -m "check why_not"
+        git push
+    
