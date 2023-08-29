@@ -17,16 +17,16 @@ jobs:
     - uses: actions/checkout@v2
     - name: Check_Why_Not
       run: |
-        for file in $(realpath lake/*);
+        for file in $(realpath lake/*)
           do 
-            if grep "why_not:" $file;
-              then echo "found why not";
-              else echo "did not find why not";\
-                echo "" >> $file;
-                echo "why_not:" >> $file;
-                echo "  -" >> $file;
-              fi;
-          done;
+            if grep "why_not:" $file
+              then echo "found why not in" $file
+              else echo "did not find why not" $file
+                echo "" >> $file
+                echo "why_not:" >> $file
+                echo "  -" >> $file
+              fi
+          done
       env: 
         ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
 
@@ -34,7 +34,7 @@ jobs:
       run: for file in $(realpath lake/*); do if grep "title:" $file; then echo "found title"; else echo "did not find title"; echo "" >> $file; echo "title:" $(echo $file | cut -d "/" -f 8 |  cut -d "." -f 1) >> $file; echo "title is now " + $file; fi; done;
     
     - name: Check tags
-      run: for file in $(realpath lake/*); do if grep "tag:" $file; then echo "found tag"; else echo "did not find tag"; echo "" >> $file; echo "tag:" >> $file; echo " -" >> $file; fi; done;
+      run: for file in $(realpath lake/*); do if grep "tags:" $file; then echo "found tags"; else echo "did not find tags"; echo "" >> $file; echo "tag:" >> $file; echo " -" >> $file; fi; done;
     
     - name: Commit and push changes
       run: |
