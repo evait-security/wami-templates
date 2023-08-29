@@ -21,7 +21,7 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
 
     - name: Check_title
-      run: for file in $(realpath lake/*); do if grep "title:" $file; then echo "found title"; else echo "did not find title"; echo "" >> $file; echo "title:" >> $file; echo "  - " (echo $file | cut -d "/" -f 8 |  cut -d "." -f 1) >> $file; echo "title is now " + $file; fi; done;
+      run: for file in $(realpath lake/*); do if grep "title:" $file; then echo "found title"; else echo "did not find title"; echo "" >> $file; echo "title:" >> $file; echo "  -" $(echo $file | cut -d "/" -f 8 |  cut -d "." -f 1) >> $file; echo "title is now " + $file; fi; done;
     
     - name: Commit and push changes
       run: |
