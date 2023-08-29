@@ -10,5 +10,4 @@ tags:
   - open-source
 description: Wireshark is a popular network protocol analyzer that runs on all the main OSes. Live capture, decryption support and offline analysis for every key network protocol are backed up by comprehensive documentation and video tutorials.
 references:
-  - https://github.com/wireshark/wireshark\nwhy_not:
-  -
+  - https://github.com/wireshark/wireshark

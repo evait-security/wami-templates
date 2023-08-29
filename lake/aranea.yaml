@@ -7,5 +7,4 @@ tags:
   - python
 description: Aranea is a fast DNS Spoofing tool, based on libpcap. It's multithread, clean, and very flexible. It uses regular expressions to specify hostnames.
 references:
-  - https://github.com/ts-way/aranea\nwhy_not:
-  -
+  - https://github.com/ts-way/aranea

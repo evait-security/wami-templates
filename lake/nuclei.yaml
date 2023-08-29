@@ -14,5 +14,4 @@ description: Fast and customisable vulnerability scanner based on simple YAML ba
 references:
   - https://github.com/projectdiscovery/nuclei
   - https://nuclei.projectdiscovery.io
-  - https://github.com/projectdiscovery/nuclei-templates\nwhy_not:
-  -
+  - https://github.com/projectdiscovery/nuclei-templates

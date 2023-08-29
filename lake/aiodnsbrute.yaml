@@ -6,5 +6,4 @@ tags:
   - python
 description: A Python 3.5+ tool that uses asyncio to brute force domain names asynchronously.
 references:
-  - https://github.com/blark/aiodnsbrute\nwhy_not:
-  -
+  - https://github.com/blark/aiodnsbrute

@@ -10,5 +10,4 @@ tags:
 description: One place for all the default credentials to assist pentesters during an engagement, this document has several products default login/password gathered from multiple sources.
 references:
   - https://github.com/ihebski/DefaultCreds-cheat-sheet
-  - pipx install git+https://github.com/ihebski/DefaultCreds-cheat-sheet\nwhy_not:
-  -
+  - pipx install git+https://github.com/ihebski/DefaultCreds-cheat-sheet

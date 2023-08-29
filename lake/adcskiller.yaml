@@ -12,5 +12,4 @@ tags:
   - esc8
 description: ADCSKiller is a Python-based tool designed to automate the process of discovering and exploiting Active Directory Certificate Services (ADCS) vulnerabilities. It leverages features of Certipy and Coercer to simplify the process of attacking ADCS infrastructure. Please note that the ADCSKiller is currently in its first drafts and will undergo further refinements and additions in future updates for sure.
 references:
-  - https://github.com/grimlockx/ADCSKiller\nwhy_not:
-  -
+  - https://github.com/grimlockx/ADCSKiller

@@ -8,5 +8,4 @@ tags:
   - curl
 description: Admin Panel Finder, is used to find administrative panels in an php server.
 references:
-  - https://github.com/sahakkhotsanyan/adfind\nwhy_not:
-  -
+  - https://github.com/sahakkhotsanyan/adfind

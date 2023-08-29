@@ -9,5 +9,4 @@ tags:
 description: This tool extracts Credit card numbers, NTLM(DCE-RPC, HTTP, SQL, LDAP, etc), Kerberos (AS-REQ Pre-Auth etype 23), HTTP Basic, SNMP, POP, SMTP, FTP, IMAP, etc from a pcap file or from a live interface. There is also an early-stage rust port of this tool called pcrust.
 references:
   - https://github.com/lgandx/PCredz
-  - https://github.com/keogami/pcrust\nwhy_not:
-  -
+  - https://github.com/keogami/pcrust

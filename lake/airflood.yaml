@@ -8,5 +8,4 @@ tags:
 description: Airflood is a modification of aireplay that allows for a DOS in in the AP. This program fills the table of clients of the AP with random MACs doing impossible new connections. Useful external "MAC filter" function can allow only the "attacker" to connect to the AP
 references:
   - https://packetstormsecurity.com/files/51127/airflood.1.tar.gz.html
-  - https://packetstormsecurity.com/files/download/51127/airflood-0.1.tar.gz\nwhy_not:
-  -
+  - https://packetstormsecurity.com/files/download/51127/airflood-0.1.tar.gz

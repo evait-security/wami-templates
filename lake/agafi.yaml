@@ -6,5 +6,4 @@ tags:
   - x86-exploits
 description: Agafi (Advanced Gadget Finder) is a x86 gadget-finder tool useful to find gadgets in programs, modules and running processes.
 references:
-  - https://github.com/helpsystems/Agafi/tree/master\nwhy_not:
-  -
+  - https://github.com/helpsystems/Agafi/tree/master

@@ -30,5 +30,4 @@ description: 3Proxy tiny free proxy server is really tiny cross-platform (Win32/
 references:
   - https://3proxy.ru/
   - https://3proxy.ru/download/
-  - https://github.com/3proxy/3proxy\nwhy_not:
-  -
+  - https://github.com/3proxy/3proxy

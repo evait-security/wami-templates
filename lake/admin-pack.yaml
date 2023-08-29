@@ -9,5 +9,4 @@ tags:
 description: ADM DNS spoofing tools - Uses a variety of active and passive methods to spoof DNS packets. Very powerful.
 references:
   - https://packetstormsecurity.com/files/10080/ADMid-pkg.tgz.html
-  - https://packetstormsecurity.com/files/download/10080/ADMid-pkg.tgz\nwhy_not:
-  -
+  - https://packetstormsecurity.com/files/download/10080/ADMid-pkg.tgz

@@ -7,5 +7,4 @@ tags:
   - android
 description: The Android NDK is a tool set that lets you implement parts of your app in native code, using languages such as C and C++. For certain types of apps, this can help you reuse code libraries written in those languages.
 references:
-  - https://developer.android.com/ndk\nwhy_not:
-  -
+  - https://developer.android.com/ndk

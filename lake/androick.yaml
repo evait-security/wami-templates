@@ -7,5 +7,4 @@ tags:
   - python
 description: Androick is a python tool to help in forensics analysis on android. Put the package name, some options and the programm will download automatically apk, datas, files permissions, manifest, databases and logs. It is easy to use and avoid all repetitives tasks!
 references:
-  - https://github.com/Flo354/Androick\nwhy_not:
-  -
+  - https://github.com/Flo354/Androick

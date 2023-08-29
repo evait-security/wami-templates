@@ -8,5 +8,4 @@ tags:
   - python
 description: Anti-XSS is an open source XSS auditor which comes with a powerful detection engine. It automates the process of detection as well as mining XSS scripts and generates the scanning report automatically.
 references:
-  - https://github.com/lewangbtcc/anti-XSS\nwhy_not:
-  -
+  - https://github.com/lewangbtcc/anti-XSS

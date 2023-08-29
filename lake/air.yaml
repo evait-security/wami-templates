@@ -11,5 +11,4 @@ tags:
   - scsi-tape
 description: AIR (Automated Image & Restore) is a GUI front-end to dd/dc3dd designed for easily creating forensic disk/partition images. Supports MD5/SHAx hashes, SCSI tape drives, imaging over a TCP/IP network, splitting images, and detailed session logging.
 references:
-  - https://sourceforge.net/projects/air-imager/\nwhy_not:
-  -
+  - https://sourceforge.net/projects/air-imager/

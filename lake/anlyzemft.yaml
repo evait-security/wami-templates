@@ -7,5 +7,4 @@ tags:
   - python
 description: AnalyzeMFT.py is designed to fully parse the MFT file form an NTFS filesystem and present the results as accurately as possible in multiple formats.
 references:
-  - https://github.com/dkovar/analyzeMFT\nwhy_not:
-  -
+  - https://github.com/dkovar/analyzeMFT

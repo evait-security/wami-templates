@@ -14,5 +14,3 @@ tags:
 description: RustHound is a cross-platform BloodHound collector tool written in Rust, making it compatible with Linux, Windows, and macOS. No AV detection and cross-compiled. RustHound generates users, groups, computers, OUs, GPOs, containers, and domain JSON files that can be analyzed with BloodHound. If you can use SharpHound, use it. Use RustHound as a backup solution if SharpHound is detected by AV or if it not compatible with your OS.
 references:
   - https://github.com/OPENCYBER-FR/RustHound
-\nwhy_not:
-  -

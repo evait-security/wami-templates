@@ -7,5 +7,4 @@ tags:
 description: AntiRansom is a tool capable of detect and stop attacks of Ransomware using honeypots. First, Anti Ransom creates a random decoy folder with many useless random documents (Excel, PDF) and then it monitors the folder waiting for changes. When a change is detected. AntiRansom tries to identify witch process is the responsible of such change and then stops it and dump the memory process(hopefully the key or password that is being used by the ransomware is inside).
 references:
   - https://www.security-projects.com/?Anti_Ransom
-  - https://github.com/YJesus/AntiRansom\nwhy_not:
-  -
+  - https://github.com/YJesus/AntiRansom

@@ -70,5 +70,4 @@ tags:
   - vxlan
 description: AIEngine is a next generation interactive/programmable Python/Ruby/Java/Lua and Go network intrusion detection system engine with capabilities of learning without any human intervention, DNS domain classification, Spam detection, network collector, network forensics and many others. AIEngine also helps network/security professionals to identify traffic and develop signatures for use them on NIDS, Firewalls, Traffic classifiers and so on.
 references:
-  - https://bitbucket.org/camp0/aiengine/src/master/\nwhy_not:
-  -
+  - https://bitbucket.org/camp0/aiengine/src/master/
