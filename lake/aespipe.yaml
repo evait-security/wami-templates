@@ -9,3 +9,6 @@ description: aespipe program is AES encrypting or decrypting pipe. It reads from
 references:
   - https://loop-aes.sourceforge.net/aespipe/
   - https://loop-aes.sourceforge.net/aespipe/aespipe-v2.4f.tar.bz2
+
+why_not:
+  -
