@@ -10,3 +10,5 @@ description: This python script looks for a large amount of possible administrat
 references:
   - https://packetstormsecurity.com/files/112855/Admin-Page-Finder-Script.html
   - https://dl.packetstormsecurity.net/UNIX/utilities/AdminpageFinder.py.txt
+why_not:
+  -

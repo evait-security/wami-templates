@@ -8,3 +8,5 @@ tags:
 description: Get clients and access points. With Alfa cards this script works correctly.
 references:
   - https://github.com/Josue87/Airopy
+why_not:
+  -

@@ -18,3 +18,5 @@ description: Amoco is a python (>=3.8) package dedicated to symbolic analysis of
 references:
   - https://github.com/bdcht/amoco
   - http://amoco.readthedocs.io/en/latest/index.html
+why_not:
+  -

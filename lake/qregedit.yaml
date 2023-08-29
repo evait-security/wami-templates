@@ -10,3 +10,5 @@ tags:
 description: Windows registry editor written with Qt, based on chntpw code.
 references:
   - https://github.com/kernel1024/qregedit
+why_not:
+  -

@@ -9,3 +9,5 @@ description: The tool is designed as a password dictionary attack tool that targ
 references:
   - https://labs.portcullis.co.uk/tools/acccheck/
   - https://labs.portcullis.co.uk/download/acccheck-0-2-1.tar.gz
+why_not:
+  -

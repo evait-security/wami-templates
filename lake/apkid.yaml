@@ -11,3 +11,5 @@ tags:
 description: APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's PEiD for Android.
 references:
   - https://github.com/rednaga/APKiD
+why_not:
+  -

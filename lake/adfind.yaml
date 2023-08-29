@@ -9,3 +9,5 @@ tags:
 description: Admin Panel Finder, is used to find administrative panels in an php server.
 references:
   - https://github.com/sahakkhotsanyan/adfind
+why_not:
+  -

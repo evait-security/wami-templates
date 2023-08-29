@@ -11,3 +11,5 @@ description: One place for all the default credentials to assist pentesters duri
 references:
   - https://github.com/ihebski/DefaultCreds-cheat-sheet
   - pipx install git+https://github.com/ihebski/DefaultCreds-cheat-sheet
+why_not:
+  -

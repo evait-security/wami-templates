@@ -9,3 +9,5 @@ tags:
 description: Argus is the first network flow system, developed by Carter Bullard in the early 1980's at Georgia Tech, and adapted for cyber security incident response at the first Computer Emergency Response Team (CERT) in Carnegie Mellon's Software Engineering Institute in the late 1980's.  Since then, network flow technology has become a critical part of modern networking and cyber security and Argus has been an active part of that evolution. Argus is network audit technology, providing a network activity audit engine for all network traffic, not just IP.  It was modeled after the Public Switched Telephone Networks (PSTN) Call Detail Record (CDR), and is designed to account for all network activity in a way that can support all types of network management functions, including security management.   Audit is a fundamental NIST security control.
 references:
   - https://openargus.org/
+why_not:
+  -

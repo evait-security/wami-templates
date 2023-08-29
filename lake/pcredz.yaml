@@ -10,3 +10,5 @@ description: This tool extracts Credit card numbers, NTLM(DCE-RPC, HTTP, SQL, LD
 references:
   - https://github.com/lgandx/PCredz
   - https://github.com/keogami/pcrust
+why_not:
+  -

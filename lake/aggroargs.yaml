@@ -11,3 +11,5 @@ tags:
 description: Features, cyclic pattern overflows with automatic offset calculation, segfault monitoring, addr2line, smart command-line option probing (long/short options), exception based buffer overflow detection, only scan ELF-Files marked as executable, autogenerate PoCs, 'smarter' usage parsing and command line sequences using smart modes like smart-sequence, smart-long, smart-short and brute mod
 references:
   - https://github.com/tintinweb/aggroArgs
+why_not:
+  -

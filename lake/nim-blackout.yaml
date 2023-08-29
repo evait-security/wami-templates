@@ -12,3 +12,5 @@ tags:
 description: NimBlackout is an adaptation of the @Blackout project originally developed in C++ by @ZeroMemoryEx, which consists of removing AV/EDRs using the gmer (BYOVD) driver. The main reason for this project was to understand how BYOVD attacks work, and then to provide a valid PoC developed in Nim. All credit must goes to the original author @ZeroMemoryEx.
 references:
   - https://github.com/Ciphey/Ciphey
+why_not:
+  -
