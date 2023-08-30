@@ -21,7 +21,7 @@ jobs:
           do 
             if grep "why_not:" $file > /dev/null
               then
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "" > /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
                 echo "why not missing"
@@ -38,9 +38,9 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do 
-            if grep "title:" $file
+            if grep "title:" $file > /dev/null
               then
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "" > /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "title missing"
@@ -55,9 +55,9 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do
-            if grep "tags:" $file
+            if grep "tags:" $file > /dev/null
               then
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "" > /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "tags missing"
