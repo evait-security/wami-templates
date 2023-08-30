@@ -46,8 +46,7 @@ jobs:
                 echo "id missing"
                 echo "add id to file with the file name as value"
                 echo "" >> $file
-                echo "id:"" >> $file
-                echo "  -" >> $file
+                echo "id:" $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) >> $file
             fi
           done
 
