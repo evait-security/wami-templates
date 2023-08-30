@@ -34,6 +34,23 @@ jobs:
       env: 
         ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
 
+    - name: Check_id
+      run: |
+        for file in $(realpath lake/*)
+          do
+            if grep "id:" $file > /dev/null
+              then
+                echo "" > /dev/null
+              else
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "id missing"
+                echo "add id to file with the file name as value"
+                echo "" >> $file
+                echo "id:"" >> $file
+                echo "  -" >> $file
+            fi
+          done
+
     - name: Check_title
       run: |
         for file in $(realpath lake/*)

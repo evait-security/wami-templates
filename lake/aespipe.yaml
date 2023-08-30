@@ -1,4 +1,4 @@
-id: aespipe
+id_debug: aespipe
 title_debug: aespipe program is AES encrypting or decrypting pipe.
 tags_debug:
   - encrypting
@@ -11,10 +11,3 @@ references:
   - https://loop-aes.sourceforge.net/aespipe/aespipe-v2.4f.tar.bz2
 why_not_debug:
   -
-why_not:
-  -
-
-title: aespipe
-
-tags:
- -
