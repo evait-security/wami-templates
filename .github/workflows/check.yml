@@ -21,8 +21,9 @@ jobs:
           do 
             if grep "why_not:" $file
               then
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
               else
-                echo $(echo $file | cut -d "/" -f8)
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
                 echo "why not missing"
                 echo "add why not to file with empty value"
                 echo "" >> $file
@@ -38,9 +39,10 @@ jobs:
         for file in $(realpath lake/*)
           do 
             if grep "title:" $file
-              then 
+              then
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
               else
-                echo $(echo $file | cut -d "/" -f8) 
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "title missing"
                 echo "add title with file name as value"
                 echo "" >> $file
@@ -54,8 +56,10 @@ jobs:
         for file in $(realpath lake/*)
           do
             if grep "tags:" $file
-              then 
-              else 
+              then
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+              else
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "tags missing"
                 echo "add tags with empty value"
                 echo "" >> $file; echo "tags:" >> $file
