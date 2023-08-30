@@ -19,7 +19,7 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do 
-            if grep "why_not:" $file
+            if grep "why_not:" $file > /dev/null
               then
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
               else
