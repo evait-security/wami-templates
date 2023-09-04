@@ -5,18 +5,9 @@ tags_debug:
   - decryption
   - pipe
   - aes
-description: aespipe program is AES encrypting or decrypting pipe. It reads from standard input and writes to standard output. It can be used to create and restore encrypted tar or cpio archives. It can be used to encrypt and decrypt loop-AES compatible encrypted disk images.
+description_debug: aespipe program is AES encrypting or decrypting pipe. It reads from standard input and writes to standard output. It can be used to create and restore encrypted tar or cpio archives. It can be used to encrypt and decrypt loop-AES compatible encrypted disk images.
 references:
   - https://loop-aes.sourceforge.net/aespipe/
   - https://loop-aes.sourceforge.net/aespipe/aespipe-v2.4f.tar.bz2
 why_not_debug:
   -
-why_not:
-  -
-
-id: aespipe
-
-title: aespipe
-
-tags:
- -

@@ -19,9 +19,9 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do 
-            if grep "why_not:" $file > /dev/null
+            if grep "why_not:" $file >> /dev/null
               then
-                echo "" > /dev/null
+                echo "" >> /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
                 echo "why not missing"
@@ -38,9 +38,9 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do
-            if grep "id:" $file > /dev/null
+            if grep "id:" $file >> /dev/null
               then
-                echo "" > /dev/null
+                echo "" >> /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
                 echo "id missing"
@@ -54,9 +54,9 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do 
-            if grep "title:" $file > /dev/null
+            if grep "title:" $file >> /dev/null
               then
-                echo "" > /dev/null
+                echo "" >> /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "title missing"
@@ -71,15 +71,30 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do
-            if grep "tags:" $file > /dev/null
+            if grep "tags:" $file >> /dev/null
               then
-                echo "" > /dev/null
+                echo "" >> /dev/null
               else
                 echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
                 echo "tags missing"
                 echo "add tags with empty value"
                 echo "" >> $file; echo "tags:" >> $file
                 echo " -" >> $file
+            fi
+          done
+    
+    - name: Check description
+      run: |
+        for file in $(realpath lake/*)
+          do
+            if grep "description:" >> /dev/null
+              then
+                echo "" >> /dev/null
+              else
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "description missing"
+                echo "adding empty description"
+                echo "" >> $file; echo "description:" >> $file
             fi
           done
     
