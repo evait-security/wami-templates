@@ -13,4 +13,3 @@ references:
   - pipx install git+https://github.com/ihebski/DefaultCreds-cheat-sheet
 why_not:
   -
-description:

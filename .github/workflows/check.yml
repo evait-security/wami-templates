@@ -87,7 +87,7 @@ jobs:
       run: |
         for file in $(realpath lake/*)
           do
-            if grep "description:" >> /dev/null
+            if grep "description:" $file >> /dev/null
               then
                 echo "" >> /dev/null
               else
@@ -97,7 +97,7 @@ jobs:
                 echo "" >> $file; echo "description:" >> $file
             fi
           done
-    
+
     - name: Commit and push changes
       run: |
         git config --global user.email "tb@evait.de"
