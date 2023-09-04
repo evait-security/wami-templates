@@ -1,0 +1,36 @@
+name: Generate Lake Hash Key
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check_run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install required packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y coreutils
+    
+    - name: Calculate and store hash
+      run: |
+        find lake/* -name "*.yaml" -exec sha256sum {} + > /tmp/temp_hashes.txt
+        cut -d ' ' -f 1 /tmp/temp_hashes.txt > /tmp/temp_hashes_only.txt
+        cat /tmp/temp_hashes_only.txt | shs256sum | cut -d ' ' -f 1 > lake_hash.txt
+
+    - name: Clean up
+      run: |
+        rm /tmp/temp_hashes.txt
+        rm /tmp/temp_hashes_only.txt
+
+    - name: Status
+      run: |
+        echo "SHA-256_hashvalue is" $(cat lake_hash.txt)
