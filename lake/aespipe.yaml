@@ -11,17 +11,3 @@ references_debug:
   - https://loop-aes.sourceforge.net/aespipe/aespipe-v2.4f.tar.bz2
 why_not_debug:
   -
-id: aespipe
-
-title: aespipe
-
-tags:
- -
-
-description:
-
-references:
- -
-
-why_not:
-  -

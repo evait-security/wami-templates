@@ -119,7 +119,13 @@ jobs:
       run: |
         git config --global user.email "tb@evait.de"
         git config --global user.name "NxtTAB"
-        git add lake/*
-        git commit -m "check why_not"
-        git push
+        status=$(git status --porcelain)
+        if [ -n "$status" ];
+          then    
+            git add lake/*
+            git commit -m "Worker check yaml"
+            git push
+          else
+            echo "Nothing to commit and push"
+        fi
     
