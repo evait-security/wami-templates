@@ -15,24 +15,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Check_Why_Not
-      run: |
-        for file in $(realpath lake/*)
-          do 
-            if grep "why_not:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
-                echo "why not missing"
-                echo "add why not to file with empty value"
-                echo "" >> $file
-                echo "why_not:" >> $file
-                echo "  -" >> $file
-            fi
-          done
-      env: 
-        ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
 
     - name: Check_id
       run: |
@@ -98,6 +80,41 @@ jobs:
             fi
           done
 
+    - name: Check references
+      run: |
+        for file in $(realpath lake/*)
+          do
+            if grep "references:" $file >> /dev/null
+              then
+                echo "" >> /dev/null
+              else
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
+                echo "references missing"
+                echo "add references with empty value"
+                echo "" >> $file; echo "references:" >> $file
+                echo " -" >> $file
+            fi
+          done
+
+    - name: Check_Why_Not
+      run: |
+        for file in $(realpath lake/*)
+          do 
+            if grep "why_not:" $file >> /dev/null
+              then
+                echo "" >> /dev/null
+              else
+                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
+                echo "why not missing"
+                echo "add why not to file with empty value"
+                echo "" >> $file
+                echo "why_not:" >> $file
+                echo "  -" >> $file
+            fi
+          done
+      env: 
+        ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
+    
     - name: Commit and push changes
       run: |
         git config --global user.email "tb@evait.de"
