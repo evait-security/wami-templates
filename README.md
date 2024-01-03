@@ -2,7 +2,7 @@
 This repository contains the community maintained files that can be used with the wami command line tool.
 
 # Community Guidelines
-Before creating a new YML file for your favorite tool, please make sure that the file follows our guidelines and best practices to keep the data well structured and maintainable.
+Before creating a new YAML file for your favorite tool, please make sure that the file follows our guidelines and best practices to keep the data well structured and maintainable.
 
 Make sure that each YML file contains the following variables
 
@@ -27,7 +27,7 @@ All of these fields are mandatory and must be set in order to work with the WAMI
 
 Try using one of the following pre-existing file as a template
 
-[nuclei](lake/nuclei.yml)
+[nuclei](lake/nuclei.yaml)
 
 # Tag stats
 
