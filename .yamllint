@@ -1,43 +1,30 @@
 extends: default
 
 rules:
-  # 80 chars should be enough, but don't fail if a line is longer
   line-length:
-    max: 80
-    level: warning
+    max: 100
+    level: error
 
-  # accept both     key:
-  #                   - item
-  #
-  # and             key:
-  #                 - item
   indentation:
     spaces: 2
-    indent-sequences: whatever
+    indent-sequences: consistent
 
-  # don't bother me with this rule
-  truthy: disable
+  truthy:
+    check-keys: false
 
-  # accept both my_dict: {key1: value1, key2: value2}
-  # and     my_dict:
-  #           key1: value1
-  #           key2: value2
-  braces:
-    max-spaces-inside: 1
+  comments:
+    min-spaces-from-content: 1
 
-  # accept both:
-  # - item1
-  # - item2
-  #
-  # and:
-  # - item1
-  # -
-  #   - subitem1
-  #   - subitem2
-  brackets:
-    min-spaces-inside: 0
-    max-spaces-inside: 1
-
-  # don't require starting and ending newlines
   document-start: disable
   document-end: disable
+
+  key-duplicates: enable
+  empty-lines: enable
+  empty-values: enable
+  hyphens: enable
+  key-ordering: disable
+  new-line-at-end-of-file: enable
+  new-lines: enable
+  octal-values: enable
+  quoted-strings: disable
+  trailing-spaces: enable
