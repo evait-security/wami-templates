@@ -1,131 +1,62 @@
-name: Yaml Check
+name: YAML Check
 
 on:
   push:
     branches:
       - main
-
-env: 
-  CARGO_TERM_COLOR: always
+    paths:
+      - 'lake/**'
 
 jobs:
-  check_run:
-
-    runs-on: ubuntu-latest
-
+  check_and_update:
+    runs-on: alpine:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Check_id
-      run: |
-        for file in $(realpath lake/*)
-          do
-            if grep "id:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
-                echo "id missing"
-                echo "add id to file with the file name as value"
-                echo "" >> $file
-                echo "id:" $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) >> $file
-            fi
-          done
+    - name: Cache lake directory
+      uses: actions/cache@v2
+      with:
+        path: lake
+        key: ${{ runner.os }}-lake-${{ hashFiles('lake/**/*.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-lake-
 
-    - name: Check_title
+    - name: Install dependencies
       run: |
-        for file in $(realpath lake/*)
-          do 
-            if grep "title:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
-                echo "title missing"
-                echo "add title with file name as value"
-                echo "" >> $file
-                echo "title:" $(echo $file | cut -d "/" -f 8 |  cut -d "." -f 1) >> $file
-                echo "title is now " + $file
-            fi
-          done
-    
-    - name: Check tags
-      run: |
-        for file in $(realpath lake/*)
-          do
-            if grep "tags:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
-                echo "tags missing"
-                echo "add tags with empty value"
-                echo "" >> $file; echo "tags:" >> $file
-                echo " -" >> $file
-            fi
-          done
-    
-    - name: Check description
-      run: |
-        for file in $(realpath lake/*)
-          do
-            if grep "description:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
-                echo "description missing"
-                echo "adding empty description"
-                echo "" >> $file; echo "description:" >> $file
-            fi
-          done
+        apk add --no-cache git yamllint
 
-    - name: Check references
-      run: |
-        for file in $(realpath lake/*)
-          do
-            if grep "references:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1) 
-                echo "references missing"
-                echo "add references with empty value"
-                echo "" >> $file; echo "references:" >> $file
-                echo " -" >> $file
-            fi
-          done
+    - name: YAML Lint
+      run: yamllint -s -c .yamllint lake/*.yaml
 
-    - name: Check_Why_Not
+    - name: Check and update YAML files
       run: |
-        for file in $(realpath lake/*)
-          do 
-            if grep "why_not:" $file >> /dev/null
-              then
-                echo "" >> /dev/null
-              else
-                echo $(echo $file | cut -d "/" -f 8 | cut -d "." -f 1)
-                echo "why not missing"
-                echo "add why not to file with empty value"
-                echo "" >> $file
-                echo "why_not:" >> $file
-                echo "  -" >> $file
+        for file in ${{ github.workspace }}/lake/*.yaml; do
+          filename=$(basename "$file" .yaml)
+          
+          # Check and add missing fields
+          for field in id title tags description references why_not; do
+            if ! grep -q "^$field:" "$file"; then
+              echo "$filename: $field missing"
+              echo "" >> "$file"
+              case $field in
+                id|title) echo "$field: $filename" >> "$file" ;;
+                tags|references|why_not) echo -e "$field:\n  -" >> "$file" ;;
+                description) echo "description:" >> "$file" ;;
+              esac
             fi
           done
-      env: 
-        ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
-    
+        done
+
     - name: Commit and push changes
       run: |
         git config --global user.email "tb@evait.de"
         git config --global user.name "NxtTAB"
-        status=$(git status --porcelain)
-        if [ -n "$status" ];
-          then    
-            git add lake/*
-            git commit -m "Worker check yaml"
-            git push
-          else
-            echo "Nothing to commit and push"
+        git add lake/*.yaml
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Worker check yaml"
+          git push
         fi
-    
+      env: 
+        ACCESS_TOKEN: ${{ secrets.Wami_Lake_yaml_check }}
