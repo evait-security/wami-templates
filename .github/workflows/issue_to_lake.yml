@@ -1,0 +1,84 @@
+name: Add Program to Lake
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add_program_to_lake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Extract GitHub URL from issue title and body
+        id: extract_url
+        run: |
+          echo "Extracting URL from issue..."
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          # Suche nach GitHub-URLs in Überschrift und Body
+          GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*')
+          echo "URL extracted: $GITHUB_URL"
+          echo "::set-output name=url::$GITHUB_URL"
+
+      - name: Fetch repository metadata
+        id: fetch_metadata
+        run: |
+          if [ -z "${{ steps.extract_url.outputs.url }}" ]; then
+            echo "No valid GitHub URL found in the issue. Exiting."
+            exit 1
+          fi
+          echo "Fetching metadata for ${{ steps.extract_url.outputs.url }}..."
+          REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ steps.extract_url.outputs.url }}")
+          REPO_NAME=$(echo "$REPO_INFO" | jq -r '.name')
+          REPO_DESC=$(echo "$REPO_INFO" | jq -r '.description')
+          README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
+            "https://raw.githubusercontent.com/${{ steps.extract_url.outputs.url }}/main/README.md" || echo "No README found")
+          
+          # Kürze die README, um die Tokens zu minimieren
+          SHORT_README=$(echo "$README" | head -c 1000) # Limitierung auf die ersten 1000 Zeichen
+          echo "Repository name: $REPO_NAME"
+          echo "Repository description: $REPO_DESC"
+          echo "README (shortened): $SHORT_README"
+          echo "::set-output name=repo_name::$REPO_NAME"
+          echo "::set-output name=repo_desc::$REPO_DESC"
+          echo "::set-output name=readme::$SHORT_README"
+
+      - name: Generate YAML with ChatGPT
+        id: chatgpt_response
+        run: |
+          echo "Generating YAML using ChatGPT..."
+          RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+            -d '{
+              "model": "gpt-4",
+              "messages": [
+                {"role": "system", "content": "You are an expert YAML generator. Use the provided structure exactly as described."},
+                {"role": "user", "content": "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format '<repository name> - <short description>'\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\nRepository name: ${{ steps.fetch_metadata.outputs.repo_name }}\nDescription: ${{ steps.fetch_metadata.outputs.repo_desc }}\nREADME (shortened):\n${{ steps.fetch_metadata.outputs.readme }}\nGitHub URL: ${{ steps.extract_url.outputs.url }}"}
+              ]
+            }')
+          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+          echo "Generated YAML:"
+          echo "$YAML_CONTENT"
+          echo "::set-output name=yaml_content::$YAML_CONTENT"
+
+      - name: Save YAML to lake directory
+        run: |
+          echo "Saving generated YAML to lake directory..."
+          echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add lake/
+          git commit -m "Add new program: ${{ steps.fetch_metadata.outputs.repo_name }}"
+          git push
