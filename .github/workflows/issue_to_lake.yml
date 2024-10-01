@@ -73,7 +73,7 @@ jobs:
           YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
           echo "Generated YAML:"
           echo "$YAML_CONTENT"
-          echo "yaml_content=$YAML_CONTENT" >> $GITHUB_OUTPUT
+          echo "::set-output name=yaml_content::$YAML_CONTENT"
 
       - name: Save YAML to lake directory
         run: |
