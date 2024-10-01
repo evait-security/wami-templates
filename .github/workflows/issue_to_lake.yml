@@ -10,6 +10,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
       
       - name: Extract GitHub URL from issue title and body
         id: extract_url
@@ -17,10 +22,10 @@ jobs:
           echo "Extracting URL from issue..."
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
-          # Suche nach GitHub-URLs in Überschrift und Body
+          # Search for GitHub URLs in title and body
           GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*')
           echo "URL extracted: $GITHUB_URL"
-          echo "::set-output name=url::$GITHUB_URL"
+          echo "url=$GITHUB_URL" >> $GITHUB_OUTPUT
 
       - name: Fetch repository metadata
         id: fetch_metadata
@@ -30,22 +35,23 @@ jobs:
             exit 1
           fi
           echo "Fetching metadata for ${{ steps.extract_url.outputs.url }}..."
-          REPO_URL=$(echo "${{ steps.extract_url.outputs.url }}" | sed 's|https://github.com/||')
+          GITHUB_URL="${{ steps.extract_url.outputs.url }}"
+          OWNER_REPO=$(echo "$GITHUB_URL" | sed 's|https://github.com/||')
           REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
-          "https://api.github.com/repos/$REPO_URL")
+            "https://api.github.com/repos/${OWNER_REPO}")
           REPO_NAME=$(echo "$REPO_INFO" | jq -r '.name')
           REPO_DESC=$(echo "$REPO_INFO" | jq -r '.description')
           README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
-          "https://raw.githubusercontent.com/$REPO_URL/main/README.md" || echo "No README found")
+            "https://raw.githubusercontent.com/${OWNER_REPO}/main/README.md" || echo "No README found")
           
-          # Kürze die README, um die Tokens zu minimieren
-          SHORT_README=$(echo "$README" | head -c 1000) # Limitierung auf die ersten 1000 Zeichen
+          # Shorten the README to minimize tokens
+          SHORT_README=$(echo "$README" | head -c 1000) # Limit to the first 1000 characters
           echo "Repository name: $REPO_NAME"
           echo "Repository description: $REPO_DESC"
           echo "README (shortened): $SHORT_README"
-          echo "repo_name=$REPO_NAME" >> $GITHUB_ENV
-          echo "repo_desc=$REPO_DESC" >> $GITHUB_ENV
-          echo "readme=$SHORT_README" >> $GITHUB_ENV
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "repo_desc=$REPO_DESC" >> $GITHUB_OUTPUT
+          echo "readme=$SHORT_README" >> $GITHUB_OUTPUT
 
       - name: Generate YAML with ChatGPT
         id: chatgpt_response
@@ -58,17 +64,18 @@ jobs:
               "model": "gpt-4",
               "messages": [
                 {"role": "system", "content": "You are an expert YAML generator. Use the provided structure exactly as described."},
-                {"role": "user", "content": "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format '<repository name> - <short description>'\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\nRepository name: ${{ steps.fetch_metadata.outputs.repo_name }}\nDescription: ${{ steps.fetch_metadata.outputs.repo_desc }}\nREADME (shortened):\n${{ steps.fetch_metadata.outputs.readme }}\nGitHub URL: ${{ steps.extract_url.outputs.url }}"}
+                {"role": "user", "content": "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format \u0027<repository name> - <short description>\u0027\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\nRepository name: ${{ steps.fetch_metadata.outputs.repo_name }}\nDescription: ${{ steps.fetch_metadata.outputs.repo_desc }}\nREADME (shortened):\n${{ steps.fetch_metadata.outputs.readme }}\nGitHub URL: ${{ steps.extract_url.outputs.url }}"}
               ]
             }')
           YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
           echo "Generated YAML:"
           echo "$YAML_CONTENT"
-          echo "::set-output name=yaml_content::$YAML_CONTENT"
+          echo "yaml_content=$YAML_CONTENT" >> $GITHUB_OUTPUT
 
       - name: Save YAML to lake directory
         run: |
           echo "Saving generated YAML to lake directory..."
+          mkdir -p lake
           echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml
           
       - name: Commit and push changes
