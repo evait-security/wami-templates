@@ -77,10 +77,9 @@ jobs:
 
       - name: Save YAML to lake directory
         run: |
-          echo "Saving generated YAML to lake directory..."
-          echo "${{ steps.cahtgpt_response.outputs.yaml_content }}"
-          mkdir -p lake
-          echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          cat > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml" <<EOF
+          ${{ steps.chatgpt_response.outputs.yaml_content }}
+          EOF
           
       - name: Commit and push changes
         run: |
