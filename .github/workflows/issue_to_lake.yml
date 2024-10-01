@@ -31,6 +31,7 @@ jobs:
           fi
           echo "Fetching metadata for ${{ steps.extract_url.outputs.url }}..."
           GITHUB_URL="${{ steps.extract_url.outputs.url }}"
+          echo "Have the GITHUB_URL=$GITHUB_URL"
           OWNER_REPO=$(echo "$GITHUB_URL" | sed 's|https://github.com/||')
           REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${OWNER_REPO}")
