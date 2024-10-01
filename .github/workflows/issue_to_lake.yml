@@ -20,7 +20,14 @@ jobs:
           # Search for GitHub URLs in title and body
           GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*')
           echo "URL extracted: $GITHUB_URL"
-          echo "url=$GITHUB_URL" >> $GITHUB_OUTPUT
+          echo "url=${GITHUB_URL}" | sed 's/.*https:\/\/github\.com\/\([^\/]*\/[^\/]*\).*/\1/' | tr -d '\n' > url.txt
+          if [ -z "${GITHUB_URL}" ]; then
+            echo "No URL found."
+            echo "valid_url=false" >> $GITHUB_ENV
+          else
+            echo "valid_url=true" >> $GITHUB_ENV
+            echo "::set-output name=url::${GITHUB_URL}"
+          fi
 
       - name: Fetch repository metadata
         id: fetch_metadata
