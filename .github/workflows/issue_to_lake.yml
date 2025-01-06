@@ -163,7 +163,7 @@ jobs:
           
           # Safe output of YAML content
           echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          printf '%s' "$YAML_CONTENT" >> $GITHUB_OUTPUT
+          printf '%s/n' "$YAML_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Save YAML to lake directory
