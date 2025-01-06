@@ -16,22 +16,28 @@ jobs:
         id: extract_url
         run: |
           echo "Extracting URL from issue..."
+          # Sichere Zuweisung der Eingabevariablen
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
-          # Search for GitHub URLs in title and body
-          GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*')
+          
+          # Suche nach GitHub URLs und nimm nur die erste URL
+          GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | \
+            grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*' | \
+            head -n 1)
+            
           echo "URL extracted: $GITHUB_URL"
           
+          # Überprüfe ob eine URL gefunden wurde
           if [ -z "${GITHUB_URL}" ]; then
             echo "No URL found."
             echo "valid_url=false" >> $GITHUB_ENV
             exit 1
           else
             echo "valid_url=true" >> $GITHUB_ENV
-            # Set URL output directly without executing
+            # Sichere Ausgabe der URL mit printf
             printf 'url=%s\n' "${GITHUB_URL}" >> $GITHUB_OUTPUT
           fi
-
+          
       - name: Fetch repository metadata
         id: fetch_metadata
         if: env.valid_url == 'true'
