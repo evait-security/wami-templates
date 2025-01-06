@@ -156,8 +156,8 @@ jobs:
         run: |
           mkdir -p lake
           cat << 'YAMLEOF' > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
-${{ steps.generate_yaml.outputs.yaml_content }}
-YAMLEOF
+          ${{ steps.generate_yaml.outputs.yaml_content }}
+          YAMLEOF
           
       - name: Commit and push changes
         if: success()
