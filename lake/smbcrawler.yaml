@@ -1,38 +1,23 @@
 
 id: smbcrawler
-title: smbcrawler
--
-A
-no-nonsense
-tool
-that
-crawls
-through
-shares
-with
-a
-list
-of
-hosts
-tags:
+title: "smbcrawler - A no-nonsense tool for crawling through shares"
+tags: 
   - crawling
   - shares
+  - hosts
   - permissions
-  - report
+  - IP ranges
+  - nmap xml file
+  - machine-readable formats
+  - HTML report
   - pass-the-hash
+  - auto-download
   - secrets
-  - threads
+  - threaded
+  - pausable
+  - Python package
+  - pipx
 references:
   - https://github.com/SySS-Research/smbcrawler
-description: >
-  SmbCrawler is no-nonsense tool that takes credentials and a list of hosts
-  and 'crawls' (or 'spiders') through those shares. Features include
-  taking host names, IP addresses, IP ranges, or an nmap XML file as input,
-  checks permissions (check for 'write' permissions is opt-in, because it
-  requires creating an empty directory on the share), customizable crawling
-  depth, outputs results in machine-readable formats or as an interactive
-  HTML report, pass-the-hash support, auto-download of interesting files,
-  reporting potential secrets, threaded, pausable, and interactively skip
-  single shares and hosts. Installation requirements and instructions are
-  detailed as well.
-why_not: 
+description: "smbcrawler is a no-nonsense tool that takes credentials and a list of hosts and 'crawls' (or 'spiders') through those shares. It takes host names, IP addresses, IP ranges, or an nmap xml file as input and checks permissions. The tool's crawling depth is customizable and outputs results in machine-readable formats or as an interactive HTML report. It also features pass-the-hash support, auto-download for interesting files, reports potential secrets, and is threaded and pausable. One can interactively skip single shares and hosts. Installation requires having usage of pipx and may involve compiling dependencies from the source."
+why_not: ""
