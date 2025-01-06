@@ -1,0 +1,9 @@
+id: recon-ng
+title: Recon-ng - Open Source Intelligence Gathering Tool
+tags:
+  - open-source
+  - intelligence-gathering
+references:
+  - https://github.com/lanmaster53/recon-ng
+description: Open Source Intelligence gathering tool aimed at reducing the time spent harvesting information from open sources.
+why_not: 
