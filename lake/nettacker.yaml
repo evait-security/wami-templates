@@ -1,51 +1,23 @@
 id: nettacker
-title: OWASP - Nettacker
-tags: 
-  - pentest
-  - API & WebUI
-  - HTML OUTPUT
-  - JSON OUTPUT
-  - CSV OUTPUT
-  - Services Vulnerability Testing
-  - Services Burte Force Testing
-  - Asset Discovery
-  - Network Service Analysis
-  - SCADA.
-  - Restricted Areas
-  - Routers
-  - HTTP Server
-  - Login and Authentications
-  - None-Indexed HTTP
-  - Paradox System
-  - Cameras
-  - Firewalls
-  - UTM
-  - WebMails
-  - VPN
-  - RDP
-  - SSH
-  - FTP
-  - TELNET Services
-  - Proxy Servers
-  - Cisco
-  - Juniper
-  - Switsches
-  - Phthon Multi Thread
-  - Information gathering
-  - Vulnerability Scanner
+title: Nettacker - Automated Penetration Testing Framework - Open-Source Vulnerability Scanner - Vulnerability Management
+tags:
+  - python
+  - http
+  - smb
+  - ldap
+  - authentication
+  - penetration_testing
+  - vulnerability_scanning
+  - vulnerability_management
+  - socket_scanning
+  - fuzzing
+  - bruteforcing
+  - thread-based
+  - asynchronous
+  - docker
+  - multi_platform
+  - command_line_interface
 references:
-  - https://owasp.org/www-project-nettacker
-  - https://github.com/OWASP/Nettacker/wiki
-  - https://github.com/OWASP/Nettacker/wiki/Installation
-  - https://github.com/OWASP/Nettacker/wiki/Usage
   - https://github.com/OWASP/Nettacker
-  - https://owasp.slack.com/
-  - https://groups.google.com/forum/#!forum/owasp-nettacker
-  - https://hub.docker.com/r/owasp/nettacker
-  - https://github.com/OWASP/Nettacker/wiki/Installation#docker
-  - https://www.openhub.net/p/OWASP-Nettacker
-  - https://owasp.org/donate/?reponame=www-project-nettacker&title=OWASP+Nettacker
-  - https://www.secologist.com/open-source-projects
-description: OWASP Nettacker project is created to automate information gathering, vulnerability scanning and eventually generating a report for networks, including services, bugs, vulnerabilities, misconfigurations, and other information. This software will utilize TCP SYN, ACK, ICMP, and many other protocols in order to detect and bypass Firewall/IDS/IPS devices. By leveraging a unique method in OWASP Nettacker for discovering protected services and devices such as SCADA. It would make a competitive edge compared to other scanner making it one of the bests.
-why_not:
-  -
+description: Nettacker is an Automated Penetration Testing Framework and an Open-Source Vulnerability Scanner that is robust and designed for vulnerability management. This framework enables functions like socket scanning, fuzzing, and bruteforcing to aid in extensive penetration testing and vulnerability scanning.
+why_not: 
