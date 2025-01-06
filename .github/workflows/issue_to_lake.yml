@@ -28,9 +28,8 @@ jobs:
             exit 1
           else
             echo "valid_url=true" >> $GITHUB_ENV
-            # Escape URL for json
-            GITHUB_URL_ESCAPED=$(echo "$GITHUB_URL" | jq -Rr @json)
-            echo "url=$GITHUB_URL_ESCAPED" >> $GITHUB_OUTPUT
+            # Set URL output
+            echo "url=${GITHUB_URL}" >> $GITHUB_OUTPUT
           fi
 
       - name: Fetch repository metadata
@@ -68,15 +67,18 @@ jobs:
             README="No README found"
           fi
           
-          # Properly escape all values for JSON
-          REPO_NAME_ESCAPED=$(echo "$REPO_NAME" | jq -Rr @json)
-          REPO_DESC_ESCAPED=$(echo "$REPO_DESC" | jq -Rr @json)
-          SHORT_README_ESCAPED=$(echo "${README:0:1000}" | jq -Rr @json)
+          # Prepare values for GitHub Actions output
+          # Using delimiter method for multiline strings
+          echo "repo_name=${REPO_NAME}" >> $GITHUB_OUTPUT
           
-          # Output escaped values
-          echo "repo_name=$REPO_NAME_ESCAPED" >> $GITHUB_OUTPUT
-          echo "repo_desc=$REPO_DESC_ESCAPED" >> $GITHUB_OUTPUT
-          echo "readme=$SHORT_README_ESCAPED" >> $GITHUB_OUTPUT
+          # For multiline values, use the delimiter syntax
+          echo "repo_desc<<EOF" >> $GITHUB_OUTPUT
+          echo "${REPO_DESC}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          echo "readme<<EOF" >> $GITHUB_OUTPUT
+          echo "${README:0:1000}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Generate YAML with ChatGPT
         id: chatgpt_response
