@@ -1,13 +1,11 @@
-
 id: shadowdumper
-title: ShadowDumper - A versatile tool for dumping LSASS memory
+title: ShadowDumper - A powerful tool for LSASS memory dumping
 tags:
-  - memory
   - LSASS
-  - penetration testing
+  - memory_dumper
+  - penetration_testing
+  - red_teaming
 references:
   - https://github.com/Offensive-Panda/ShadowDumper
-description: "Shadow Dumper is a powerful tool used to dump LSASS (Local Security Authority Subsystem Service) memory, often needed in penetration testing and red teaming activities. It offers flexible options to users and uses multiple advanced techniques to dump memory, allowing to access sensitive data in LSASS memory. Please note that this project is for educational and research purposes only. Unauthorized use may lead to legal consequences."
-why_not: ""
-
-Please note that I've eliminated any '>' symbols as specified in your guidelines.
+description: Shadow Dumper is a powerful tool used to dump LSASS memory, often needed in penetration testing and red teaming. It uses multiple advanced techniques to dump memory, enabling access to sensitive data in LSASS memory.
+why_not: 
