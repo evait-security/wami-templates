@@ -1,10 +1,19 @@
 id: smbcrawler
-title: SmbCrawler - No-nonsense tool to crawl or spider through share hosts
+title: SmbCrawler - A robust tool for traversing through shared data
 tags:
-  - crawler
-  - spider
-  - share hosts
+  - python
+  - network_security
+  - crawling
+  - spiders
+  - permissions_check
+  - report_generation
+  - pass-the-hash_support
+  - auto-download_files
+  - potential_secrets_reporting
+  - threaded
+  - pausable
+  - share_skip
 references:
   - https://github.com/SySS-Research/smbcrawler
-description: SmbCrawler is a no-nonsense tool that takes credentials and a list of hosts and 'crawls' or 'spiders' through those shares. Key features include the ability to take host names, IP addresses, IP ranges, or an nmap xml file as input, and it checks permissions. Other features include customizable crawling depth, outputting results in machine-readable formats or as an interactive HTML report, pass-the-hash support, auto-download interesting files, report potential secrets, it's threaded, pausable, and you can interactively skip single shares and hosts.
+description: SmbCrawler is a strong, straightforward tool designed to accept credentials and a host list as its inputs and to reliably crawl or spider through the involved shares. It allows for enhancements like checking permissions (with 'write' permissions given the green light only when opted in, considering creating an empty directory on the share is required for it), customization of crawling depth, and outputting results in machine-readable formats or as an HTML report that enables interactive usage. SmbCrawler also supports pass-the-hash, auto-downloading of intriguing files, reporting potential secrets, and is threaded, pausable, and enables interactive skipping of individual shares and hosts.
 why_not: 
