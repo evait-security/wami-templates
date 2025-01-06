@@ -1,22 +1,22 @@
 id: smbcrawler
-title: SmbCrawler - A tool that crawls or spiders through network shares
+title: SmbCrawler - A no-nonsense tool that crawls through network shares
 tags:
   - python
   - smb
   - authentication
-  - network_analysis
-  - file_crawling
-  - permission_checking
-  - html_reports
-  - pass_the_hash
-  - auto_download_files
-  - secret_detection
-  - threading
-  - operation_pausable
-  - interactive_skipping
-  - pipx_dependency
-  - network_hosts
+  - network_crawling
+  - spidering
+  - file_retrieval
+  - protocol_inspection
+  - multi_host_support
+  - information_gathering
+  - penetration_testing
+  - secure_credentials_handling
+  - cross_platform
+  - network_protocols
+  - threat_demonstration
+  - automated_scanning
 references:
   - https://github.com/SySS-Research/smbcrawler
-description: SmbCrawler is a practical network analysis tool that accepts credentials and a list of hosts and navigates (or 'spiders') through those shares. Its core features include receiving various input types ranging from host names, IP addresses, IP ranges, or an nmap xml file, checking permissions, customizable crawling depth, outputting results in machine-readable formats or as an interactive HTML report, pass-the-hash support, auto-downloading of interesting files, reporting potential secrets, pausing operations, interactive skipping of single shares and hosts.
-why_not: ""
+description: smbcrawler is a no-nonsense tool that takes credentials and a list of hosts and crawls (or spiders) through those shares, demonstrating how a threat actor or penetration tester might gather information and retrieve files from multiple hosts across a network.
+why_not: 
