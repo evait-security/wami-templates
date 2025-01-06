@@ -97,29 +97,33 @@ jobs:
         run: |
           # Using heredoc for the prompt template
           cat << 'EOF' > prompt.txt
-          Create a YAML file with the following structure, ensuring proper formatting:
+          Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
 
-          id: [repository name, lowercase, no spaces]
-          title: [repository name] - [one-line description]
+          id: lowercase_repository_name
+          title: RepositoryName - Brief one-line description
           tags:
-            - [relevant tags, one per line]
+            - tag1
+            - tag2
           references:
-            - [GitHub URL]
-            - [additional URLs if available]
-          description: [Detailed description without YAML special characters, no '>' symbol]
-          why_not: [Alternative suggestions or empty string]
+            - repository_url
+            - additional_urls
+          description: Single paragraph description without any YAML special characters or formatting indicators
+          why_not: Alternative tool suggestion or empty string
 
-          Important formatting rules:
-          1. No empty lines at the start
-          2. No YAML block scalar indicators (>-, |-, etc.)
-          3. Properly format the title as a single line
-          4. Ensure clean tag formatting
+          Rules:
+          - Generate pure YAML only, no meta-comments or notes
+          - No empty lines at start or end
+          - No YAML block indicators (>, |, etc.)
+          - No quotes unless absolutely necessary
+          - Format tags in clean, simple list style
+          - Keep title as a single continuous line
+          - Description should be a single paragraph without line breaks
           EOF
           
           # Create request body
           REQUEST_JSON=$(jq -n \
             --arg model "gpt-4" \
-            --arg system "You are a YAML generator focusing on clean, valid YAML output without special characters or formatting issues." \
+            --arg system "You are a YAML generator that produces only pure YAML content. Do not include any explanatory text, comments, or notes about formatting. Output raw YAML content directly without any wrapper text or meta-commentary." \
             --arg prompt "$(cat prompt.txt)" \
             --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
             --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
@@ -152,8 +156,8 @@ jobs:
         run: |
           mkdir -p lake
           cat << 'YAMLEOF' > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
-          ${{ steps.generate_yaml.outputs.yaml_content }}
-          YAMLEOF
+${{ steps.generate_yaml.outputs.yaml_content }}
+YAMLEOF
           
       - name: Commit and push changes
         if: success()
