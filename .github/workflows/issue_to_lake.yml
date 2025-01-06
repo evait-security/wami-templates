@@ -18,8 +18,9 @@ jobs:
           echo "Extracting URL from issue..."
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
-          # Search for GitHub URLs in title and body
-          GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*')
+          
+          # Search for GitHub URLs in title and body and take only the first match
+          GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*' | head -n 1)
           echo "URL extracted: $GITHUB_URL"
           
           if [ -z "${GITHUB_URL}" ]; then
@@ -28,8 +29,8 @@ jobs:
             exit 1
           else
             echo "valid_url=true" >> $GITHUB_ENV
-            # Set URL output directly without executing
-            printf 'url=%s\n' "${GITHUB_URL}" >> $GITHUB_OUTPUT
+            # Correctly format the output for GitHub Actions
+            echo "url=${GITHUB_URL}" >> $GITHUB_OUTPUT
           fi
 
       - name: Fetch repository metadata
