@@ -1,0 +1,22 @@
+id: hednsextractor
+title: HEDnsExtractor - A suite for hunting suspicious targets, expose domains and phishing discovery
+tags:
+  - python
+  - dns
+  - phishing-discovery
+  - target-hunting
+  - domain-exposure
+  - cyber-security
+  - threat-intelligence
+  - threat-detection
+  - network-security
+  - analysis-tool
+  - hostile-environment-detection
+  - intrusion-detection
+  - threat-mitigation
+  - automated-response
+  - Linux
+references:
+  - https://github.com/HuntDownProject/HEDnsExtractor
+description: HEDnsExtractor is a comprehensive suite for hunting suspicious targets, exposing domains and phishing discovery. It is designed as a powerful tool for network security and threat detection.
+why_not: 
