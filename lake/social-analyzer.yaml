@@ -1,12 +1,23 @@
 id: social-analyzer
-title: Social Analyzer - Fast, Reliable and Easy to Use Tool for Social Media and Websites Analysis
+title: Social Analyzer - API, CLI, and Web App for analyzing and finding a person's profile in 1000 social media websites
 tags:
-  - pentest
-  - social-media
-  - website-analysis
-  - open-source
-description: Social Analyzer is a fast, reliable, and easy-to-use tool for social media and websites analysis. It is designed to help users analyze and find a person's profile across +300 social media websites, forums, dating apps, and other platforms.
+  - python
+  - http
+  - OAuth2
+  - profile_analysis
+  - social_media_integration
+  - web_scraping
+  - asynchronous_operations
+  - api_deployment
+  - cloud_platform_integration
+  - batch_processing
+  - data_visualization
+  - dynamic_content_loading
+  - data_collection
+  - privacy_feature
+  - identity_verification
+  - multithreading
 references:
   - https://github.com/qeeqbox/social-analyzer
-why_not:
-  -
+description: API, CLI, and web application for analyzing and finding a person's profile across 1000 social media websites. It allows users to quickly gather and visualize profile data across various platforms, making it an excellent tool for social media research and analysis.
+why_not: ''
