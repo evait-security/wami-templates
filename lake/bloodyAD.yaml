@@ -1,0 +1,22 @@
+id: bloodyad
+title: bloodyAD - Active Directory Privilege Escalation Framework
+tags:
+  - python
+  - ldap
+  - pass-the-hash
+  - pass-the-ticket
+  - active_directory_privilege_escalation
+  - authentication_with_cleartext_passwords
+  - authentication_with_certificates
+  - secure_exchange_via_ldaps
+  - usage_with_socks_proxy
+  - ldap_service_binding
+  - exchange_of_sensitive_information
+  - transparent_usage
+  - domain_controller_interaction
+  - escalation_swiss_army_knife
+  - privesc_specific_ldap_calls
+references:
+  - https://github.com/CravateRouge/bloodyAD
+description: bloodyAD is an Active Directory privilege escalation framework, performing specific LDAP calls to a domain controller. It supports various authentication methods including using cleartext passwords, pass-the-hash, pass-the-ticket, or certificates. It binds to the LDAP services of a domain controller to perform privilege escalation, supporting the exchange of sensitive information without LDAPS. The framework is designed to be used transparently with a SOCKS proxy.
+why_not:
