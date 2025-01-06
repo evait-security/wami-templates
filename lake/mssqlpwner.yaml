@@ -1,12 +1,22 @@
-id: masqlpwner
-title: MS-SQl PWNER
+id: mssqlpwner
+title: MSSqlPwner - A tool for quick and easy exploitation of MSSQL databases
 tags:
-  - pentest
-  - python-based
-  - SQL
-  - pwner
-description: MSSqlPwner is an advanced and versatile pentesting tool designed to seamlessly interact and pwn MSSQL servers. That tool is based on impacket, which allows attackers to authenticate to databases using clear-text passwords NTLM Hashes, and kerberos tickets. With MSSqlPwner, users can execute custom commands through various methods, including custom assembly, xp_cmdshell, and sp_oacreate(Ole Automation Procedures) and much more.
+  - python
+  - smb
+  - ldap
+  - http
+  - database_exploitation
+  - sql_injection
+  - brute_force
+  - lateral_movement
+  - windows
+  - active_directory
+  - multithreaded
+  - standalone_script
+  - ssl_encryption
+  - two_factor_authentication
+  - command_line_interface
 references:
   - https://github.com/ScorpionesLabs/MSSqlPwner
-why_not:
-  -
+description: MSSqlPwner is a Python-based tool that is designed for quick and efficient exploitation of MSSQL databases. With capabilities such as SQL injection, brute force and lateral movement, it offers a straightforward solution for testing an organization's MSSQL databases against potential exploits and vulnerabilities. MSSqlPwner features easy integration with common protocols such as SMB, LDAP, and HTTP. It also supports SSL encryption and two-factor authentication for additional security. The tool runs as a standalone script and interacts via a simple command-line interface.
+why_not: sqlmap
