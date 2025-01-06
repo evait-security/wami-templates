@@ -164,7 +164,8 @@ jobs:
         if: env.valid_url == 'true'
         run: |
           mkdir -p lake
-          printf '%s\n' "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          # Ensure proper YAML formatting is preserved
+          echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
           
       - name: Commit and push changes
         if: env.valid_url == 'true'
