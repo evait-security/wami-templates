@@ -66,15 +66,41 @@ jobs:
               HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$README_URL")
               
               if [ "$HTTP_CODE" = "200" ]; then
-                README_CONTENT=$(curl -s "$README_URL")
-                # Found valid README, break both loops
-                break 2
+                # Fetch and clean README content
+                README_CONTENT=$(curl -s "$README_URL" | sed -E '
+                  # Remove HTML tags
+                  s/<[^>]*>//g;
+                  # Remove image references
+                  s/!\[[^]]*\]([^)]*))//g;
+                  # Remove badges
+                  s/\[[^]]*\]\(https:\/\/img\.shields\.io[^)]*\)//g;
+                  # Remove empty lines at start of file
+                  /./,$!d;
+                  # Remove multiple empty lines
+                  /^$/N;/^\n$/D;
+                  # Remove special characters
+                  s/[[:cntrl:]]//g;
+                  # Remove links but keep text
+                  s/\[([^]]*)\]\([^)]*\)/\1/g;
+                ')
+                
+                if [ -n "$README_CONTENT" ]; then
+                  break 2
+                fi
               fi
             done
           done
           
           if [ -z "${README_CONTENT}" ]; then
             README_CONTENT="No README found"
+          else
+            # Additional cleaning and verification
+            README_CONTENT=$(echo "$README_CONTENT" | awk '
+              NR==1{if($0~/^[[:space:]]*$/){next}}  # Skip if first line is empty
+              {gsub(/\r/,"")}                       # Remove carriage returns
+              {gsub(/^[[:space:]]+|[[:space:]]+$/,"")} # Trim whitespace
+              length>0{print}                       # Only print non-empty lines
+            ')
           fi
           
           {
@@ -95,8 +121,6 @@ jobs:
         id: generate_yaml
         if: success()
         run: |
-          # Using heredoc for the prompt template
-          cat << 'EOF' > prompt.txt
           # Using heredoc for the prompt template
           cat << 'EOF' > prompt.txt
           Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
