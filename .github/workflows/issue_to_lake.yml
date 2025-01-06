@@ -2,10 +2,11 @@ name: Add Program to Lake
 
 on:
   issues:
-    types: [opened]
+    types: [labeled]
 
 jobs:
   add_program_to_lake:
+    if: github.event.label.name == 'Generate with AI'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
