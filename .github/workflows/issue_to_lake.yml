@@ -129,12 +129,10 @@ jobs:
             --arg readme "${ESCAPED_README}" \
             --arg url "${{ steps.extract_url.outputs.url }}" \
             --arg prompt "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format \"<repository name> - <short description>\"\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\n" \
+            --argjson messages "[{\"role\": \"system\", \"content\": \$system}, {\"role\": \"user\", \"content\": (\$prompt + \"Repository name: \" + \$name + \"\nDescription: \" + \$desc + \"\nREADME (shortened):\n\" + \$readme + \"\nGitHub URL: \" + \$url)}]" \
             '{
-              model: $model,
-              messages: [
-                {role: "system", content: $system},
-                {role: "user", content: ($prompt + "Repository name: " + $name + "\nDescription: " + $desc + "\nREADME (shortened):\n" + $readme + "\nGitHub URL: " + $url)}
-              ]
+              "model": $model,
+              "messages": $messages
             }')
           
           # API request with error handling
