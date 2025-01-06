@@ -102,17 +102,32 @@ jobs:
           id: lowercase_repository_name
           title: RepositoryName - Brief one-line description
           tags:
-            - primary_technology
-            - main_programming_language
+            Technical Core:
+            - primary_programming_language
+            - technical_protocols_used (e.g., smb, http, ldap)
+            - specific_standards (e.g., ntlm, kerberos)
+            
+            Main Features:
             - primary_purpose
+            - core_functionalities
             - specific_technical_features
+            
+            Implementation Details:
             - target_platform_or_system
-            - security_related_tags
-            - implementation_details
+            - implementation_approach
             - key_dependencies
-            - deployment_method
+            - architecture_aspects
+            
+            Security and Performance:
+            - security_context
+            - authentication_methods
             - performance_characteristics
+            
+            Additional Context:
             - domain_specific_terms
+            - usage_patterns
+            - integration_aspects
+
           references:
             - repository_url
             - additional_urls
@@ -120,16 +135,16 @@ jobs:
           why_not: Alternative tool suggestion or empty string
 
           Tag Generation Rules:
-          - Include at least 10 specific, descriptive tags
-          - Always specify the programming language used
-          - Include both general category tags and specific technical feature tags
-          - Add security-related tags if applicable
-          - Include target platform or system tags
-          - Specify important technical dependencies
-          - Add domain-specific terminology
-          - Include implementation approach tags
-          - Add performance or size-related tags if relevant
-          - Include deployment or usage context tags
+          - Include at least 15 specific, descriptive tags
+          - Always include the core protocol or standard if applicable (e.g., smb, ldap, http)
+          - Specify both the programming language and any key frameworks
+          - Include authentication and security-related protocol tags
+          - Add specific technical capability tags
+          - Include operation mode tags (e.g., threaded, async)
+          - Add data handling and storage tags
+          - Include integration and compatibility tags
+          - Add performance and scalability tags
+          - Include usage context and environment tags
 
           General Rules:
           - Generate pure YAML only, no meta-comments or notes
