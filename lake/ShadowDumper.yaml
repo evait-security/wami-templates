@@ -1,11 +1,22 @@
 id: shadowdumper
-title: ShadowDumper - A powerful tool for LSASS memory dumping
+title: ShadowDumper - Powerful tool to dump LSASS memory
 tags:
-  - LSASS
-  - memory_dumper
-  - penetration_testing
-  - red_teaming
+  - C#
+  - LSASS memory dumping
+  - penetration testing
+  - red teaming
+  - unhooked injection
+  - direct syscalls
+  - MDWD
+  - MiniDumpWriteDump API
+  - EDR evasion
+  - sensitive data access
+  - memory dump
+  - authentication data acquisition
+  - cybersecurity
+  - windows
+  - educational use
 references:
   - https://github.com/Offensive-Panda/ShadowDumper
-description: Shadow Dumper is a powerful tool used to dump LSASS memory, often needed in penetration testing and red teaming. It uses multiple advanced techniques to dump memory, enabling access to sensitive data in LSASS memory.
-why_not: 
+description: Shadow Dumper is a powerful tool used to dump LSASS memory, often needed in penetration testing and red teaming. It uses multiple advanced techniques to dump memory, allowing to access sensitive data in LSASS memory.
+why_not: Mimikatz
