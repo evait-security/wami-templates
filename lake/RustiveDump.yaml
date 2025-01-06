@@ -1,22 +1,33 @@
 id: RustiveDump
-title: RustiveDump - LSASS memory dumper using only NTAPIs
-tags: 
+title: RustiveDump
+-
+LSASS
+memory
+dumper
+using
+NTAPIs
+tags:
   - Rust
-  - Memory Dumper
-  - LSASS.exe
-  - NT system calls
-  - Rustic64
-  - PIC
-  - CRT-Independent
-  - winsock
-  - cargo make
-  - Memory64List
-  - Mimikatz
-  - Pypykatz
+  - memory dumper
+  - NTAPIs
+  - minidump
   - XOR encryption
-description: |
-  RustiveDump is a Rust-based tool created to dump the memory of the lsass.exe process using only NT system calls. It generates a minimal minidump file containing essential components. It supports XOR encryption and remote transmission. It can also be compiled as Position Independent Code (PIC). The tool provides detailed logs of each step when the debug mode is enabled. The dump file can be sent directly to a remote server using winsock API calls. RustiveDump offers several configurable build options through cargo make for features like XOR encryption, remote file transmission, and verbose logging. The Repository should be used responsibly, and any misuse is not condoned by the author.
+  - remote file transmission
+  - Position Independent Code
+
 references:
   - https://github.com/safedv/RustiveDump
-  - https://github.com/libyal/libmdmp/blob/main/documentation/Minidump%20(MDMP)%20format.asciidoc
-why_not:
+  - https://github.com/safedv/Rustic64
+
+description: >-
+  RustiveDump is a Rust-based tool designed to dump the memory of the
+  lsass.exe process using only NT system calls. It creates a minimal
+  minidump file from scratch, containing essential components like SystemInfo,
+  ModuleList, and Memory64List, with support for XOR encryption and remote
+  transmission. Additionally, RustiveDump now implements the design of Rustic64, 
+  allowing it to be compiled as Position Independent Code (PIC), making it more 
+  versatile. This project is a personal learning experience, focusing on leveraging 
+  native Windows APIs for memory dumping and building a minimalistic minidump file 
+  entirely from the ground up. 
+
+why_not: 
