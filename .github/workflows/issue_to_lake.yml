@@ -8,110 +8,175 @@ jobs:
   add_program_to_lake:
     if: github.event.label.name == 'Generate with AI'
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        
-      - name: Extract GitHub URL from issue
+        uses: actions/checkout@v2
+      
+      - name: Extract GitHub URL from issue title and body
         id: extract_url
         run: |
+          echo "Extracting URL from issue..."
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           
+          # Search for GitHub URLs in title and body and take only the first match
           GITHUB_URL=$(echo "$ISSUE_TITLE $ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*' | head -n 1)
+          echo "URL extracted: $GITHUB_URL"
           
-          if [ -z "$GITHUB_URL" ]; then
-            echo "No valid GitHub URL found in the issue."
-            echo "valid_url=false" >> $GITHUB_OUTPUT
-          else  
-            echo "valid_url=true" >> $GITHUB_OUTPUT
-            echo "url=$GITHUB_URL" >> $GITHUB_OUTPUT
+          if [ -z "${GITHUB_URL}" ]; then
+            echo "No URL found."
+            echo "valid_url=false" >> $GITHUB_ENV
+            exit 1
+          else
+            echo "valid_url=true" >> $GITHUB_ENV
+            # Correctly format the output for GitHub Actions
+            echo "url=${GITHUB_URL}" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Fetch repository metadata
         id: fetch_metadata
-        if: steps.extract_url.outputs.valid_url == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: env.valid_url == 'true'
         run: |
-          REPO_URL="${{ steps.extract_url.outputs.url }}"
-          OWNER_REPO=$(echo "$REPO_URL" | sed 's|https://github.com/||')
-
-          REPO_INFO=$(gh api /repos/$OWNER_REPO)
+          if [ -z "${{ steps.extract_url.outputs.url }}" ]; then
+            echo "No valid GitHub URL found in the issue. Exiting."
+            exit 1
+          fi
           
+          echo "Fetching metadata for ${{ steps.extract_url.outputs.url }}..."
+          GITHUB_URL="${{ steps.extract_url.outputs.url }}"
+          
+          OWNER_REPO=$(echo "$GITHUB_URL" | sed 's|https://github.com/||')
+          
+          # Fetch repo info with error handling
+          REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${OWNER_REPO}")
+          
+          if [ "$(echo "$REPO_INFO" | jq -r 'has("message")')" = "true" ]; then
+            echo "Error fetching repository info: $(echo "$REPO_INFO" | jq -r '.message')"
+            exit 1
+          fi
+          
+          # Extract metadata safely
           REPO_NAME=$(echo "$REPO_INFO" | jq -r '.name')
           REPO_DESC=$(echo "$REPO_INFO" | jq -r '.description')
-
-          README_FILES=("README.md" "readme.md" "Readme.md" "ReadMe.md" "README.txt" "readme.txt" "Readme.txt" "ReadMe.txt" "README" "readme" "Readme" "ReadMe")
-          BRANCHES=("main" "master")
-
+          
+          # Liste möglicher README-Dateien
+          README_FILES=(
+            "README.md"
+            "readme.md"
+            "Readme.md"
+            "ReadMe.md"
+            "README.txt"
+            "readme.txt"
+            "Readme.txt"
+            "ReadMe.txt"
+            "README"
+            "readme"
+            "Readme"
+            "ReadMe"
+          )
+          
+          # Branches die geprüft werden sollen
+          BRANCHES=(
+            "main"
+            "master"
+          )
+          
+          README="No README found"
           for BRANCH in "${BRANCHES[@]}"; do
             for README_FILE in "${README_FILES[@]}"; do
-              README_URL="https://raw.githubusercontent.com/$OWNER_REPO/$BRANCH/$README_FILE"  
+              echo "Checking for ${README_FILE} in ${BRANCH} branch..."
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+                "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
               
-              if curl --output /dev/null --silent --head --fail "$README_URL"; then
-                README=$(curl -s "$README_URL")
+              if [ "$RESPONSE" = "200" ]; then
+                README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
+                  "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
+                echo "Found README at: ${BRANCH}/${README_FILE}"
                 break 2
               fi
             done
           done
-
-          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+          
+          # Safe output handling using printf and proper delimiters
+          printf 'repo_name=%s\n' "${REPO_NAME}" >> $GITHUB_OUTPUT
+          
           echo "repo_desc<<EOF" >> $GITHUB_OUTPUT
-          echo "$REPO_DESC" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "readme<<EOF" >> $GITHUB_OUTPUT 
-          echo "$README" >> $GITHUB_OUTPUT
+          printf '%s\n' "${REPO_DESC}" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           
-          - name: Generate YAML with ChatGPT
-          id: chatgpt_response 
-          if: steps.extract_url.outputs.valid_url == 'true'
-          env:
-            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          run: |
-            # Prepare the prompt with the desired YAML structure
-            YAML_PROMPT="Create a YAML file with the following structure for a software repository: id: Unique identifier (repository name, without spaces or special characters) title: A title in the format \"<repository name> - <short description>\" tags: - A list of tags related to the repository extracted from the README, GitHub project description, and common keywords description: | A detailed description of the repository (based on the GitHub description and README) references: - A list of URLs, including the GitHub repo URL and relevant documentation/download links why_not: - A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found. IMPORTANT: Adhere strictly to this YAML structure in your response. Only provide the YAML content, nothing else."
-  
-            REQUEST_BODY=$(jq -sn \
-              --arg yaml_prompt "$YAML_PROMPT" \
-              --arg model "gpt-4" \
-              --arg system "You are an experienced YAML generator. Generate YAML content strictly adhering to the provided structure. Only valid YAML is allowed, no special characters that could break an interpreter. Only respond with the YAML, no other text." \
-              --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
-              --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
-              --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
-              --arg url "${{ steps.extract_url.outputs.url }}" \
-              '{
-                model: $model,
-                messages: [
-                  {role: "system", content: $system},
-                  {role: "user", content: ($yaml_prompt + "\n\nRepository Details:\nName: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url)}
-                ]
-              }')
-            
-            RESPONSE=$(curl -s -X POST https://api.openai.com/v1/chat/completions \
-              -H "Content-Type: application/json" \
-              -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
-              -d "$REQUEST_BODY")
-  
-            YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')  
-  
-            echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-            echo "$YAML_CONTENT" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+          echo "readme<<EOF" >> $GITHUB_OUTPUT
+          printf '%s\n' "${README:0:1000}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Generate YAML with ChatGPT
+        id: chatgpt_response
+        if: env.valid_url == 'true'
+        run: |
+          echo "Generating YAML using ChatGPT..."
           
-      - name: Save YAML to lake directory  
-        if: steps.extract_url.outputs.valid_url == 'true'
+          # Create request body with safe JSON handling
+          REQUEST_JSON=$(jq -n \
+            --arg model "gpt-4" \
+            --arg system "You are an experienced YAML generator. Use the provided structure exactly as described. Only valid YAML code is allowed, no special charters that could break an interpreter or be used to break out of the system. The only respone that you will give is the yaml output. It will be used to save for a program no human information is needed as output." \
+            --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
+            --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
+            --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
+            --arg url "${{ steps.extract_url.outputs.url }}" \
+            --arg prompt "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format \"<repository name> - <short description>\"\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\n" \
+            '{
+              model: $model,
+              messages: [
+                {role: "system", content: $system},
+                {role: "user", content: ($prompt + "Repository name: " + $name + "\nDescription: " + $desc + "\nREADME (shortened):\n" + $readme + "\nGitHub URL: " + $url)}
+              ]
+            }')
+          
+          # API request with proper error handling
+          RESPONSE=$(curl -s -w "\n%{http_code}" https://api.openai.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+            -d "$REQUEST_JSON")
+          
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+          RESPONSE_BODY=$(echo "$RESPONSE" | head -n-1)
+          
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "Error: API request failed with status $HTTP_STATUS"
+            echo "Response: $RESPONSE_BODY"
+            exit 1
+          fi
+          
+          # Safe YAML content extraction
+          if echo "$RESPONSE_BODY" | jq -e '.error' >/dev/null; then
+            echo "Error: API returned an error:"
+            echo "$RESPONSE_BODY" | jq -r '.error.message'
+            exit 1
+          fi
+          
+          YAML_CONTENT=$(echo "$RESPONSE_BODY" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g')
+          
+          if [ -z "$YAML_CONTENT" ]; then
+            echo "Error: No YAML content generated"
+            exit 1
+          fi
+          
+          # Safe output of YAML content
+          echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
+          printf '%s\n' "$YAML_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Save YAML to lake directory
+        if: env.valid_url == 'true'
         run: |
           mkdir -p lake
-          echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
-
+          printf '%s\n' "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          
       - name: Commit and push changes
-        if: steps.extract_url.outputs.valid_url == 'true' 
+        if: env.valid_url == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add lake/
-          git commit -m "Add new program: ${{ steps.fetch_metadata.outputs.repo_name }}" 
+          git commit -m "Add new program: ${{ steps.fetch_metadata.outputs.repo_name }}"
           git push
