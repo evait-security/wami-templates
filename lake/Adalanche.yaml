@@ -1,0 +1,22 @@
+id: adalanche
+title: Adalanche - Active Directory ACL Visualizer and Explorer - who's really Domain Admin?
+tags:
+  - csharp
+  - ldap
+  - acl
+  - access_control
+  - active_directory
+  - windows
+  - visualization
+  - explorer
+  - domain_admin_identification
+  - commercial_version_available
+  - smb
+  - security_feature
+  - authentication
+  - operational_characteristics
+  - deployment_details
+references:
+  - https://github.com/lkarlslund/Adalanche
+description: Adalanche is a tool that offers visualization and exploration of Active Directory Access Control Lists (ACLs). Its core functionality focuses on identifying the real Domain Administrators in a network. Commercial versions of the tool are available from NetSection.
+why_not:
