@@ -112,12 +112,12 @@ jobs:
           # Create request body with safe JSON handling
           REQUEST_JSON=$(jq -n \
             --arg model "gpt-4" \
-            --arg system "You are an experienced YAML generator. Follow these rules strictly: 1. Do not add empty lines at the start of the YAML 2. Format the title as a simple string, not as an array 3. Use proper string escaping for any special characters in the title 4. The title should be in the format: 'repository_name - description' 5. Ensure all YAML is valid and properly indented 6. Only output the raw YAML without any markdown code blocks" \
+            --arg system "You are an experienced YAML generator. Use the provided structure exactly as described. Only valid YAML code is allowed, no special charters that could break an interpreter or be used to break out of the system. The only respone that you will give is the yaml output. It will be used to save for a program no human information is needed as output." \
             --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
             --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
             --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
             --arg url "${{ steps.extract_url.outputs.url }}" \
-            --arg prompt "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format '<repository name> - <short description>'\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\n" \
+            --arg prompt "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format \"<repository name> - <short description>\"\ntags: A list of tags related to the repository\n  - Tags should be extracted from the README, GitHub project description, and common keywords\n\nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\n\ndescription: A detailed description of the repository (based on the GitHub description and README)\n\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\n" \
             '{
               model: $model,
               messages: [
@@ -164,8 +164,9 @@ jobs:
         if: env.valid_url == 'true'
         run: |
           mkdir -p lake
-          # Ensure proper YAML formatting is preserved
-          echo "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          cat > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml" <<EOF
+          ${{ steps.chatgpt_response.outputs.yaml_content }}
+          EOF
           
       - name: Commit and push changes
         if: env.valid_url == 'true'
