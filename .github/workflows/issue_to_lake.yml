@@ -65,38 +65,41 @@ jobs:
           echo "$README" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           
-      - name: Generate YAML with ChatGPT
-        id: chatgpt_response 
-        if: steps.extract_url.outputs.valid_url == 'true'
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          REQUEST_BODY=$(jq -n \
-            --arg model "gpt-4" \
-            --arg system "You are an experienced YAML generator. Use the provided structure exactly as described. Only valid YAML code is allowed, no special characters that could break an interpreter. The only response is the YAML output." \
-            --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
-            --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
-            --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
-            --arg url "${{ steps.extract_url.outputs.url }}" \
-            --arg prompt "Create a YAML file with the following structure for a software repository:\n\nid: Unique identifier (repository name, without spaces or special characters)\ntitle: A title in the format \"<repository name> - <short description>\"\ntags: A list of tags related to the repository extracted from the README, GitHub project description, and common keywords\ndescription: A detailed description of the repository (based on the GitHub description and README) \nreferences:\n  - A list of URLs, including the GitHub repo URL and relevant documentation/download links\nwhy_not: A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found.\n\n" \
-            '{
-              model: $model,
-              messages: [
-                {role: "system", content: $system},
-                {role: "user", content: ($prompt + "Repository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url)}
-              ]
-            }')
-
-          RESPONSE=$(curl -s -X POST https://api.openai.com/v1/chat/completions \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
-            -d "$REQUEST_BODY")
-
-          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g')
-
-          echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          echo "$YAML_CONTENT" >> $GITHUB_OUTPUT 
-          echo "EOF" >> $GITHUB_OUTPUT
+          - name: Generate YAML with ChatGPT
+          id: chatgpt_response 
+          if: steps.extract_url.outputs.valid_url == 'true'
+          env:
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          run: |
+            # Prepare the prompt with the desired YAML structure
+            YAML_PROMPT="Create a YAML file with the following structure for a software repository: id: Unique identifier (repository name, without spaces or special characters) title: A title in the format \"<repository name> - <short description>\" tags: - A list of tags related to the repository extracted from the README, GitHub project description, and common keywords description: | A detailed description of the repository (based on the GitHub description and README) references: - A list of URLs, including the GitHub repo URL and relevant documentation/download links why_not: - A suggestion of why another similar tool might be used instead, or leave it empty if no suggestion is found. IMPORTANT: Adhere strictly to this YAML structure in your response. Only provide the YAML content, nothing else."
+  
+            REQUEST_BODY=$(jq -sn \
+              --arg yaml_prompt "$YAML_PROMPT" \
+              --arg model "gpt-4" \
+              --arg system "You are an experienced YAML generator. Generate YAML content strictly adhering to the provided structure. Only valid YAML is allowed, no special characters that could break an interpreter. Only respond with the YAML, no other text." \
+              --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
+              --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
+              --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
+              --arg url "${{ steps.extract_url.outputs.url }}" \
+              '{
+                model: $model,
+                messages: [
+                  {role: "system", content: $system},
+                  {role: "user", content: ($yaml_prompt + "\n\nRepository Details:\nName: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url)}
+                ]
+              }')
+            
+            RESPONSE=$(curl -s -X POST https://api.openai.com/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+              -d "$REQUEST_BODY")
+  
+            YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')  
+  
+            echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
+            echo "$YAML_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           
       - name: Save YAML to lake directory  
         if: steps.extract_url.outputs.valid_url == 'true'
