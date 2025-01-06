@@ -143,6 +143,7 @@ jobs:
             exit 1
           fi
           
+          # Extract the raw YAML from ChatGPT response
           YAML_CONTENT=$(printf '%s' "$RESPONSE_BODY" \
             | jq -r '.choices[0].message.content' \
             | sed 's/```yaml//g; s/```//g')
@@ -151,6 +152,9 @@ jobs:
             printf '%s\n' "Error: No YAML content generated"
             exit 1
           fi
+          
+          # Remove any single quotes (') and double quotes (") to avoid shell conflicts
+          YAML_CONTENT=$(printf '%s' "$YAML_CONTENT" | sed "s/[\'\"]//g")
           
           # Store the raw YAML in an output variable for the next step
           printf '%s\n' "yaml_content<<EOF" >> "$GITHUB_OUTPUT"
@@ -174,3 +178,4 @@ jobs:
           git add lake/
           git commit -m "Add new program: ${{ steps.fetch_metadata.outputs.repo_name }}"
           git push
+
