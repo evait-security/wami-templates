@@ -1,15 +1,22 @@
 id: wireshark
-title: Wireshark - Network Protocol Analyzer
-tags: 
-  - pentest
-  - protocol-analyzer
-  - network
-  - traffic
-  - traffic-inspection
-  - security
-  - open-source
-description: Wireshark is a popular network protocol analyzer that runs on all the main OSes. Live capture, decryption support and offline analysis for every key network protocol are backed up by comprehensive documentation and video tutorials.
+title: Wireshark - Read-only mirror of Wireshark's Git repository
+tags:
+  - C
+  - TCP/IP
+  - HTTP
+  - SSL/TLS
+  - network analysis
+  - packet sniffing
+  - pcap
+  - GUI
+  - Cross-platform
+  - real-time analysis
+  - 802.11
+  - threaded
+  - filtering
+  - decryption
+  - diagnostics
 references:
   - https://github.com/wireshark/wireshark
-why_not:
-  -
+description: Wireshark is a widely-used network protocol analyzer which lets you see what's happening on your network at a microscopic level. It is used for network troubleshooting, analysis, software and communications protocol development. It is the de facto (and often de jure) standard across many industries and educational institutions.
+why_not: tcpdump
