@@ -1,0 +1,22 @@
+id: kiterunner
+title: Kiterunner - Contextual Content Discovery Tool
+tags:
+  - go
+  - http
+  - authentication-optional
+  - content-discovery
+  - directory-enumeration
+  - asset-identification
+  - protocol-agnostic
+  - adaptive-model
+  - multi-threaded
+  - high-performance
+  - secure
+  - api-integration
+  - target-sensitive
+  - batch-processing
+  - high-volume-scanning
+references:
+  - https://github.com/assetnote/kiterunner
+description: Kiterunner is a tool for Contextual Content Discovery focusing on target-sensitive directory enumeration and asset identification. It features an adaptive model, is multi-threaded for high-performance, and suitable for batch processing and high-volume scanning.
+why_not: 
