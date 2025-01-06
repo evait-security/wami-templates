@@ -1,17 +1,22 @@
 id: nimexec
-title: NimExec - a fileless remote command execution tool that uses The Service Control Manager Remote Protocol (MS-SCMR)
+title: NimExec - Fileless Command Execution for Lateral Movement in Nim
 tags:
-  - pentest
-  - MS-SCMR
-  - SMB2
-  - cracking
-  - open-source
-  - NTLM
-  - WinAPI
-  - svcctl
-  - Nim
-description: Basically, NimExec is a fileless remote command execution tool that uses The Service Control Manager Remote Protocol (MS-SCMR). It changes the binary path of a random or given service run by LocalSystem to execute the given command on the target and restores it later via hand-crafted RPC packets instead of WinAPI calls. It sends these packages over SMB2 and the svcctl named pipe. NimExec needs an NTLM hash to authenticate to the target machine and then completes this authentication process with the NTLM Authentication method over hand-crafted packages. Since all required network packages are manually crafted and no operating system-specific functions are used, NimExec can be used in different operating systems by using Nim's cross-compilability support. This project was inspired by Julio's SharpNoPSExec tool. You can think that NimExec is Cross Compilable and built-in Pass the Hash supported version of SharpNoPSExec. Also, I learned the required network packet structures from Kevin Robertson's Invoke-SMBExec Script.
+  - nim
+  - smb
+  - fileless-command-execution
+  - lateral-movement
+  - ntlm-authentication
+  - active-directory
+  - exploitation-framework
+  - persistence-mechanism
+  - hacking-tool
+  - post-exploitation
+  - windows-platform
+  - active-directory-environments
+  - compiled-language
+  - security-testing
+  - scalable-code
 references:
-  - https://github.com/Ciphey/Ciphey
-why_not:
-  -
+  - https://github.com/frkngksl/NimExec
+description: NimExec is a fileless command execution tool designed for lateral movement in an Active Directory environment. It leverages the Nim programming language's capability to execute SMB and process injection capabilities without dropping any payload to disk. It uses NTLM for authentication and is intended for security testing.
+why_not: ""
