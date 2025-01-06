@@ -1,18 +1,22 @@
 id: rusthound
-title: Rusthound - BloodHound collector tool written in Rust
-tags:
-  - pentest
-  - no-av-detection
-  - win
-  - linux
-  - mac
-  - cross-compiled
-  - collector-tool
+title: RustHound - Active Directory data ingestor for BloodHound Legacy written in Rust
+tags: 
   - rust
-  - bloodhound
-  - sharphound
-description: RustHound is a cross-platform BloodHound collector tool written in Rust, making it compatible with Linux, Windows, and macOS. No AV detection and cross-compiled. RustHound generates users, groups, computers, OUs, GPOs, containers, and domain JSON files that can be analyzed with BloodHound. If you can use SharpHound, use it. Use RustHound as a backup solution if SharpHound is detected by AV or if it not compatible with your OS.
+  - active_directory
+  - data_ingestor
+  - bloodhound_legacy
+  - ldap
+  - smb
+  - threaded
+  - data_mining
+  - data_collection
+  - integration_capabilities
+  - data_analysis
+  - implementation_detail
+  - data_pipeline
+  - security_protocol
+  - usage_patterns
 references:
-  - https://github.com/OPENCYBER-FR/RustHound
-why_not:
-  -
+  - https://github.com/NH-RED-TEAM/RustHound
+description: RustHound is an Active Directory data ingestor for BloodHound Legacy. This tool is made in Rust, possesses data mining capability and integration features, provides analysis of data through BloodHound Legacy, includes security protocols and has implementation details and usage patterns worth checking out.
+why_not: ""
