@@ -1,15 +1,22 @@
 id: defaultcreds-cheat-sheet
-title: Default Credentials Cheat Sheet
+title: DefaultCreds-cheat-sheet - One place for all the default credentials to assist the Blue/Red teamers activities on finding devices with default password
 tags:
-  - pentest
-  - open-source
-  - credentials
-  - default-credentials
-  - weak-credentials
   - python
-description: One place for all the default credentials to assist pentesters during an engagement, this document has several products default login/password gathered from multiple sources.
+  - http
+  - authentication
+  - password-checking
+  - blue-team
+  - red-team
+  - security
+  - credentials-verification
+  - default-password-checking
+  - credential-database
+  - network-security
+  - async
+  - deployment
+  - integration
+  - cybersecurity 
 references:
   - https://github.com/ihebski/DefaultCreds-cheat-sheet
-  - pipx install git+https://github.com/ihebski/DefaultCreds-cheat-sheet
-why_not:
-  -
+description: This repository serves as a dive stock for all the default credentials used in various systems to assist the Blue or Red teamers activities on finding devices with default passwords. It ensures to provide an extensive databank of passwords for network security and credentials verification.
+why_not: 
