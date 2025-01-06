@@ -59,13 +59,43 @@ jobs:
           REPO_NAME=$(echo "$REPO_INFO" | jq -r '.name')
           REPO_DESC=$(echo "$REPO_INFO" | jq -r '.description')
           
-          # Fetch README with error handling
-          README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
-            "https://raw.githubusercontent.com/${OWNER_REPO}/main/README.md")
+          # Liste möglicher README-Dateien
+          README_FILES=(
+            "README.md"
+            "readme.md"
+            "Readme.md"
+            "ReadMe.md"
+            "README.txt"
+            "readme.txt"
+            "Readme.txt"
+            "ReadMe.txt"
+            "README"
+            "readme"
+            "Readme"
+            "ReadMe"
+          )
           
-          if [ $? -ne 0 ]; then
-            README="No README found"
-          fi
+          # Branches die geprüft werden sollen
+          BRANCHES=(
+            "main"
+            "master"
+          )
+          
+          README="No README found"
+          for BRANCH in "${BRANCHES[@]}"; do
+            for README_FILE in "${README_FILES[@]}"; do
+              echo "Checking for ${README_FILE} in ${BRANCH} branch..."
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+                "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
+              
+              if [ "$RESPONSE" = "200" ]; then
+                README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
+                  "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
+                echo "Found README at: ${BRANCH}/${README_FILE}"
+                break 2
+              fi
+            done
+          done
           
           # Safe output handling using printf and proper delimiters
           printf 'repo_name=%s\n' "${REPO_NAME}" >> $GITHUB_OUTPUT
