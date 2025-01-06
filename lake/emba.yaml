@@ -1,0 +1,22 @@
+id: emba
+title: EMBA - The firmware security analyzer
+tags:
+  - bash
+  - smb
+  - ldap
+  - http
+  - kerberos
+  - firmware_security_analysis
+  - static_code_analysis
+  - logger
+  - linux_based_firmware
+  - firmware_scanning
+  - multithreaded
+  - async
+  - docker_based_implementation
+  - integration_with_existing_systems
+  - target_oriented_testing
+references:
+  - https://github.com/e-m-b-a/emba
+description: EMBA is a firmware security analyzer that specifically focuses on static code analysis, logging, and firmware scanning. It operates in a multithreaded, asynchronous fashion and is designed for linux-based systems. Docker implementation and integration capabilities are also inherent in the tool.
+why_not: 
