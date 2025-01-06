@@ -206,7 +206,9 @@ jobs:
         if: success()
         run: |
           mkdir -p lake
-          cat << 'YAMLEOF' > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          YAML_CONTENT="${{ steps.generate_yaml.outputs.yaml_content }}"
+          YAML_ID=$(echo "$YAML_CONTENT" | grep '^id:' | cut -d' ' -f2)
+          cat << 'YAMLEOF' > "lake/${YAML_ID}.yaml"
           ${{ steps.generate_yaml.outputs.yaml_content }}
           YAMLEOF
           
