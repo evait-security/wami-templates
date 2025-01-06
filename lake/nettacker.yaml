@@ -33,7 +33,6 @@ tags:
   - Phthon Multi Thread
   - Information gathering
   - Vulnerability Scanner
-description: OWASP Nettacker project is created to automate information gathering, vulnerability scanning and eventually generating a report for networks, including services, bugs, vulnerabilities, misconfigurations, and other information. This software will utilize TCP SYN, ACK, ICMP, and many other protocols in order to detect and bypass Firewall/IDS/IPS devices. By leveraging a unique method in OWASP Nettacker for discovering protected services and devices such as SCADA. It would make a competitive edge compared to other scanner making it one of the bests.
 references:
   - https://owasp.org/www-project-nettacker
   - https://github.com/OWASP/Nettacker/wiki
@@ -47,5 +46,6 @@ references:
   - https://www.openhub.net/p/OWASP-Nettacker
   - https://owasp.org/donate/?reponame=www-project-nettacker&title=OWASP+Nettacker
   - https://www.secologist.com/open-source-projects
+description: OWASP Nettacker project is created to automate information gathering, vulnerability scanning and eventually generating a report for networks, including services, bugs, vulnerabilities, misconfigurations, and other information. This software will utilize TCP SYN, ACK, ICMP, and many other protocols in order to detect and bypass Firewall/IDS/IPS devices. By leveraging a unique method in OWASP Nettacker for discovering protected services and devices such as SCADA. It would make a competitive edge compared to other scanner making it one of the bests.
 why_not:
   -
