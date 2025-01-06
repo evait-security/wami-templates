@@ -1,29 +1,22 @@
 id: dnsrecon
-title: DNSRecon - Effective Security Assessment and Network Troubleshooting whit Python. 
+title: dnsrecon - DNS Enumeration Script
 tags:
-  - pentest
-  - python-based
-  - ns-records
-  - zone-transfer
-  - general-dns-records
-  - mx
-  - soa
-  - ns
-  - a
-  - aaaa
-  - spf
-  - txt
-  - srv
-  - tld
-  - wildcard-resolution
-  - brute-force
-  - subdomain
-  - ptr-lookup
-  - ip-range
-  - cidr
-  - cname
-description: DNSRecon is a Python port of a Ruby script that I wrote to learn the language and about DNS in early 2007. This time I wanted to learn about Python and extend the functionality of the original tool and in the process re-learn how DNS works and how could it be used in the process of a security assessment and network troubleshooting.
+  - Python
+  - DNS
+  - Network Enumeration
+  - Security Tool
+  - Data Collection
+  - DNS Inspection
+  - Penetration Testing
+  - Reconnaissance
+  - Data Enumeration
+  - Network Security
+  - Command Line Tool
+  - Cybersecurity
+  - Threat Hunting
+  - IPv4/IPv6
+  - IP Resolution
 references:
   - https://github.com/darkoperator/dnsrecon
-why_not:
-  -
+description: dnsrecon is a Python-based tool designed to provide DNS enumeration capabilities for security examinations and data collection. It allows for DNS inspection and data enumeration, making it beneficial for penetration testing, reconnaissance, and threat hunting activities.
+why_not: 
