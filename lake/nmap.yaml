@@ -1,14 +1,22 @@
 id: nmap
-title: Nmap - Network Mapper
-tags: 
-  - pentest
-  - scanner
-  - portscanner
+title: Nmap - The Network Mapper. Github mirror of official SVN repository.
+tags:
+  - c++
+  - networking
+  - tcp-ip
+  - scanning
+  - fingerprinting
+  - enumeration
   - security
-  - reconnaissance
-  - open-source
-description: Nmap is the go-to tool for reconnaissance. It can quickly scan large networks and runs on all major OSes. It reports on the availability of hosts on the network, the services they are running, the OS versions they are running, the type of packet filter and firewalls in use, and other useful intelligence needed prior to launching an attack.'
+  - intrusion-detection
+  - asynchronous
+  - nse-scripts
+  - port-scan
+  - os-detection
+  - version-detection
+  - host-discovery
+  - lua
 references:
   - https://github.com/nmap/nmap
-why_not:
-  -
+description: Nmap is a utility for network exploration and security auditing. It supports ping scanning, many port scanning mechanisms, host discovery, and version and OS detection.
+why_not: ''
