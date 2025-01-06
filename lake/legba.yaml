@@ -1,0 +1,22 @@
+id: legba
+title: Legba - A multiprotocol credentials bruteforcer / password sprayer and enumerator
+tags:
+  - Python
+  - smb
+  - ldap
+  - http
+  - bruteforcing
+  - enumeration
+  - password_spraying
+  - authentication
+  - penetration_testing
+  - security_auditing
+  - multi_protocol
+  - command-line_interface
+  - async_operations
+  - deployment_on_server
+  - usage_in_security_testing_context
+references:
+  - https://github.com/evilsocket/legba
+description: Legba is a multiprotocol credentials bruteforcer, password sprayer, and enumerator created with Python. This tool is primarily used for penetration testing and security auditing.
+why_not: ''
