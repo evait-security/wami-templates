@@ -1,0 +1,22 @@
+id: upload_bypass
+title: Upload_Bypass - A simple tool for bypassing file upload restrictions
+tags:
+  - python
+  - http
+  - basic_authentication
+  - security_testing
+  - file_upload_bypass
+  - penetration_testing
+  - network_security
+  - file_upload_restrictions
+  - web_application_security
+  - deserialization_issues
+  - exploit_development
+  - async_operation
+  - standalone_deployment
+  - REST_API_integration
+  - web_based_usage
+references:
+  - https://github.com/sAjibuu/Upload_Bypass
+description: Upload_Bypass is a Python based tool which is designed to bypass file upload restrictions in different web applications. It makes use of HTTP and basic authentication for security testing and penetration testing purposes. A key feature of this tool is the ability to exploit deserialization issues which are commonly encountered in web applications today.
+why_not: ''
