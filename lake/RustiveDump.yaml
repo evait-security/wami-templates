@@ -1,15 +1,22 @@
 id: rustivedump
-title: RustiveDump - LSASS memory dumper using only NTAPIs, creating a minimal minidump
+title: RustiveDump - LSASS memory dumper using NTAPIs
 tags:
-  - rust
-  - dumper
-  - memory
+  - Rust
+  - lsass.exe
   - NTAPI
-  - minidump
-  - shellcode
-  - encryption
-  - remote_file_transmition
+  - PIC
+  - XOR encryption
+  - remote transmission
+  - memory dumping
+  - minidump file
+  - Windows
+  - SystemInfo
+  - ModuleList
+  - Memory64List
+  - process memory management
+  - NT system calls
+  - no-std
 references:
   - https://github.com/safedv/RustiveDump
-description: RustiveDump is a Rust-based tool designed to dump the memory of the lsass.exe process using only NT system calls. It creates a minimal minidump file from scratch, containing essential components like SystemInfo, ModuleList, and Memory64List, with support for XOR encryption and remote transmission. It implements the design of Rustic64, allowing it to be compiled as Position Independent Code (PIC), making it more versatile. The project focuses on leveraging native Windows APIs for memory dumping and building a minimalistic minidump file entirely from the ground up.
-why_not: ""
+description: RustiveDump is a Rust-based tool for dumping the memory of the lsass.exe process using only NT system calls. It creates a minimal minidump file containing essential components such as SystemInfo, ModuleList, and Memory64List, with support for XOR encryption and remote transmission. The tool can also be compiled as Position Independent Code (PIC), adding to its versatility.
+why_not: ''
