@@ -37,7 +37,7 @@ jobs:
             # Sichere Ausgabe der URL mit printf
             printf 'url=%s\n' "${GITHUB_URL}" >> $GITHUB_OUTPUT
           fi
-          
+
       - name: Fetch repository metadata
         id: fetch_metadata
         if: env.valid_url == 'true'
@@ -163,7 +163,7 @@ jobs:
           
           # Safe output of YAML content
           echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          printf '%s\n' "$YAML_CONTENT" >> $GITHUB_OUTPUT
+          printf '%s' "$YAML_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Save YAML to lake directory
