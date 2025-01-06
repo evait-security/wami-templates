@@ -1,0 +1,23 @@
+id: smbclient-ng
+title: smbclient-ng - A fast and user friendly way to interact with SMB shares
+tags:
+  - python
+  - smb_protocol
+  - user_authentication
+  - file_management
+  - network_file_transfer
+  - user_interface_interaction
+  - cross_platform
+  - asynchronous_operations
+  - SMB_shares_interaction
+  - performance_optimized
+  - security_encryption
+  - portability
+  - protocol_transparency
+  - versatile_usage
+  - command-line_interface
+  - network_file_management_system
+references:
+  - https://github.com/p0dalirius/smbclient-ng
+description: smbclient-ng is a fast and user friendly way to interact with SMB shares without the need for extensive knowledge of SMB protocol or intricate command line manipulation, making it accessible and optimal for versatile usage.
+why_not: ""
