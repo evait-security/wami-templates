@@ -1,0 +1,38 @@
+
+id: smbcrawler
+title: smbcrawler
+-
+A
+no-nonsense
+tool
+that
+crawls
+through
+shares
+with
+a
+list
+of
+hosts
+tags:
+  - crawling
+  - shares
+  - permissions
+  - report
+  - pass-the-hash
+  - secrets
+  - threads
+references:
+  - https://github.com/SySS-Research/smbcrawler
+description: >
+  SmbCrawler is no-nonsense tool that takes credentials and a list of hosts
+  and 'crawls' (or 'spiders') through those shares. Features include
+  taking host names, IP addresses, IP ranges, or an nmap XML file as input,
+  checks permissions (check for 'write' permissions is opt-in, because it
+  requires creating an empty directory on the share), customizable crawling
+  depth, outputs results in machine-readable formats or as an interactive
+  HTML report, pass-the-hash support, auto-download of interesting files,
+  reporting potential secrets, threaded, pausable, and interactively skip
+  single shares and hosts. Installation requirements and instructions are
+  detailed as well.
+why_not: 
