@@ -102,20 +102,40 @@ jobs:
           id: lowercase_repository_name
           title: RepositoryName - Brief one-line description
           tags:
-            - tag1
-            - tag2
+            - primary_technology
+            - main_programming_language
+            - primary_purpose
+            - specific_technical_features
+            - target_platform_or_system
+            - security_related_tags
+            - implementation_details
+            - key_dependencies
+            - deployment_method
+            - performance_characteristics
+            - domain_specific_terms
           references:
             - repository_url
             - additional_urls
           description: Single paragraph description without any YAML special characters or formatting indicators
           why_not: Alternative tool suggestion or empty string
 
-          Rules:
+          Tag Generation Rules:
+          - Include at least 10 specific, descriptive tags
+          - Always specify the programming language used
+          - Include both general category tags and specific technical feature tags
+          - Add security-related tags if applicable
+          - Include target platform or system tags
+          - Specify important technical dependencies
+          - Add domain-specific terminology
+          - Include implementation approach tags
+          - Add performance or size-related tags if relevant
+          - Include deployment or usage context tags
+
+          General Rules:
           - Generate pure YAML only, no meta-comments or notes
           - No empty lines at start or end
           - No YAML block indicators (>, |, etc.)
           - No quotes unless absolutely necessary
-          - Format tags in clean, simple list style
           - Keep title as a single continuous line
           - Description should be a single paragraph without line breaks
           EOF
