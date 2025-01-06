@@ -1,9 +1,22 @@
 id: recon-ng
-title: Recon-ng - Open Source Intelligence Gathering Tool
+title: Recon-ng - Open Source Intelligence gathering tool
 tags:
-  - open-source
+  - Python
+  - http
+  - OSINT
+  - web-based-recon
   - intelligence-gathering
+  - information-harvesting
+  - modular-framework
+  - open-source
+  - social-engineering
+  - metasploit-framework
+  - learning-curve
+  - scraping
+  - data-extraction
+  - intelligence-analysis
+  - cyber-security
 references:
   - https://github.com/lanmaster53/recon-ng
-description: Open Source Intelligence gathering tool aimed at reducing the time spent harvesting information from open sources.
-why_not: 
+description: Recon-ng is an Open Source Intelligence gathering tool aimed at reducing the time spent harvesting information from open sources. It provides a full-featured reconnaissance framework designed for conducting open source web-based reconnaissance in a thorough and efficient manner. Modeled after Metasploit Framework to keep the learning curve minimal, Recon-ng is highly modular and ideal for both novice and experienced Python developers.
+why_not: Metasploit Framework for exploitation, Social-Engineer Toolkit for social engineering tasks.
