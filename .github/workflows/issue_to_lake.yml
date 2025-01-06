@@ -11,150 +11,163 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Extract GitHub URL
+
+      - name: Extract GitHub URL from issue title and body
         id: extract_url
         run: |
-          # Using heredoc to safely handle multiline strings
-          cat << 'EOF' > extract_url.sh
+          printf '%s\n' "Extracting URL from issue..."
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           
-          # Search for GitHub URLs in title and body
-          GITHUB_URL=$(printf '%s %s' "$ISSUE_TITLE" "$ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*' | head -n 1)
+          # Search for GitHub URLs in title and body and take only the first match
+          GITHUB_URL=$(printf '%s' "$ISSUE_TITLE $ISSUE_BODY" | grep -oE 'https://github.com/[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+' | head -n 1)
+          printf '%s\n' "URL extracted: $GITHUB_URL"
           
           if [ -z "${GITHUB_URL}" ]; then
-            echo "::error::No valid GitHub URL found"
+            printf '%s\n' "No URL found."
+            printf '%s\n' "valid_url=false" >> "$GITHUB_ENV"
             exit 1
+          else
+            printf '%s\n' "valid_url=true" >> "$GITHUB_ENV"
+            # Correctly format the output for GitHub Actions
+            printf '%s\n' "url=${GITHUB_URL}" >> "$GITHUB_OUTPUT"
           fi
-          
-          echo "url=${GITHUB_URL}" >> $GITHUB_OUTPUT
-          EOF
-          
-          chmod +x extract_url.sh
-          ./extract_url.sh
 
       - name: Fetch repository metadata
         id: fetch_metadata
-        if: success()
+        if: env.valid_url == 'true'
         run: |
-          # Using heredoc to safely handle multiline strings
-          cat << 'EOF' > fetch_metadata.sh
-          GITHUB_URL="${{ steps.extract_url.outputs.url }}"
-          OWNER_REPO=$(echo "$GITHUB_URL" | sed 's|https://github.com/||')
-          
-          # Fetch repository info
-          REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${OWNER_REPO}")
-          
-          if [ "$(echo "$REPO_INFO" | jq -r 'has("message")')" = "true" ]; then
-            echo "::error::Failed to fetch repository info: $(echo "$REPO_INFO" | jq -r '.message')"
+          if [ -z "${{ steps.extract_url.outputs.url }}" ]; then
+            printf '%s\n' "No valid GitHub URL found in the issue. Exiting."
             exit 1
           fi
           
-          # Extract metadata
-          REPO_NAME=$(echo "$REPO_INFO" | jq -r '.name')
-          REPO_DESC=$(echo "$REPO_INFO" | jq -r '.description')
+          printf '%s\n' "Fetching metadata for ${{ steps.extract_url.outputs.url }}..."
+          GITHUB_URL="${{ steps.extract_url.outputs.url }}"
+          OWNER_REPO=$(printf '%s' "$GITHUB_URL" | sed 's|https://github.com/||')
           
-          # Try different README variants and branches
-          README_VARIANTS=("README.md" "readme.md" "Readme.md" "README.txt" "readme.txt" "README")
+          # Fetch repo info with error handling
+          REPO_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${OWNER_REPO}")
+          
+          if [ "$(printf '%s' "$REPO_INFO" | jq -r 'has("message")')" = "true" ]; then
+            printf '%s\n' "Error fetching repository info: $(printf '%s' "$REPO_INFO" | jq -r '.message')"
+            exit 1
+          fi
+          
+          # Extract metadata safely
+          REPO_NAME=$(printf '%s' "$REPO_INFO" | jq -r '.name')
+          REPO_DESC=$(printf '%s' "$REPO_INFO" | jq -r '.description')
+          
+          # Possible README filenames
+          README_FILES=(
+            "README.md" "readme.md" "Readme.md" "ReadMe.md"
+            "README.txt" "readme.txt" "Readme.txt" "ReadMe.txt"
+            "README"     "readme"     "Readme"     "ReadMe"
+          )
+          
+          # Branches to check
           BRANCHES=("main" "master")
           
+          README="No README found"
           for BRANCH in "${BRANCHES[@]}"; do
-            for README_FILE in "${README_VARIANTS[@]}"; do
-              README_URL="https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}"
-              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$README_URL")
+            for README_FILE in "${README_FILES[@]}"; do
+              printf '%s\n' "Checking for ${README_FILE} in ${BRANCH} branch..."
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+                "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
               
-              if [ "$HTTP_CODE" = "200" ]; then
-                README_CONTENT=$(curl -s "$README_URL")
-                # Found valid README, break both loops
+              if [ "$RESPONSE" = "200" ]; then
+                README=$(curl -s -H "Accept: application/vnd.github.v3.raw" \
+                  "https://raw.githubusercontent.com/${OWNER_REPO}/${BRANCH}/${README_FILE}")
+                printf '%s\n' "Found README at: ${BRANCH}/${README_FILE}"
                 break 2
               fi
             done
           done
           
-          if [ -z "${README_CONTENT}" ]; then
-            README_CONTENT="No README found"
-          fi
+          # Output with safe handling
+          printf 'repo_name=%s\n' "${REPO_NAME}" >> "$GITHUB_OUTPUT"
           
-          {
-            echo "repo_name=${REPO_NAME}"
-            echo "repo_desc<<EOF"
-            echo "${REPO_DESC}"
-            echo "EOF"
-            echo "readme<<EOF"
-            echo "${README_CONTENT:0:1000}"
-            echo "EOF"
-          } >> $GITHUB_OUTPUT
-          EOF
+          printf '%s\n' "repo_desc<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${REPO_DESC}" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "EOF" >> "$GITHUB_OUTPUT"
           
-          chmod +x fetch_metadata.sh
-          ./fetch_metadata.sh
+          # Only take first 1000 characters of README
+          SHORT_README=$(printf '%s' "${README:0:1000}")
+          
+          printf '%s\n' "readme<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${SHORT_README}" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "EOF" >> "$GITHUB_OUTPUT"
 
-      - name: Generate YAML
-        id: generate_yaml
-        if: success()
+      - name: Generate YAML with ChatGPT
+        id: chatgpt_response
+        if: env.valid_url == 'true'
         run: |
-          # Using heredoc for the prompt template
-          cat << 'EOF' > prompt.txt
-          Create a YAML file with the following structure, ensuring proper formatting:
-
-          id: [repository name, lowercase, no spaces]
-          title: [repository name] - [one-line description]
-          tags:
-            - [relevant tags, one per line]
-          references:
-            - [GitHub URL]
-            - [additional URLs if available]
-          description: [Detailed description without YAML special characters, no '>' symbol]
-          why_not: [Alternative suggestions or empty string]
-
-          Important formatting rules:
-          1. No empty lines at the start
-          2. No YAML block scalar indicators (>-, |-, etc.)
-          3. Properly format the title as a single line
-          4. Ensure clean tag formatting
-          EOF
+          printf '%s\n' "Generating YAML using ChatGPT..."
           
-          # Create request body
+          # Create request body with safe JSON handling
           REQUEST_JSON=$(jq -n \
             --arg model "gpt-4" \
-            --arg system "You are a YAML generator focusing on clean, valid YAML output without special characters or formatting issues." \
-            --arg prompt "$(cat prompt.txt)" \
+            --arg system "You are an experienced YAML generator. Use the provided structure exactly as described. Only valid YAML code is allowed. Do not use block-scalar syntax (e.g. '>-' or '|') for the description. Combine short lines in the title if they are obviously fragments (e.g. 'RustiveDump' and 'LSASS memory dumper using NTAPIs' should become 'RustiveDump - LSASS memory dumper using NTAPIs'). Output *only* the YAML code with no extra Markdown or triple-backtick fences." \
             --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
             --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
             --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
             --arg url "${{ steps.extract_url.outputs.url }}" \
+            --arg prompt "Create a YAML file with the following structure:\n\nid: <unique_identifier>\ntitle: <repository_name - short_desc>\ntags:\n  - (list of relevant tags)\n\nreferences:\n  - (list of URLs, including the GitHub repo URL)\n\ndescription: (detailed description of the repository, from description + README)\n\nwhy_not: (why another tool might be used, or empty if no reason)\n\nConstraints:\n - No block-scalar syntax.\n - Title lines must be joined if they appear broken.\n - Provide only valid YAML.\n\n" \
             '{
               model: $model,
               messages: [
                 {role: "system", content: $system},
-                {role: "user", content: ($prompt + "\n\nRepository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url)}
+                {role: "user", content: ($prompt + "Repository name: " + $name + "\nDescription: " + $desc + "\nREADME (shortened):\n" + $readme + "\nGitHub URL: " + $url)}
               ]
-            }')
+            }'
+          )
           
-          # Make API request
-          RESPONSE=$(curl -s -H "Content-Type: application/json" \
+          RESPONSE=$(curl -s -w "\n%{http_code}" https://api.openai.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
-            -d "$REQUEST_JSON" \
-            "https://api.openai.com/v1/chat/completions")
+            -d "$REQUEST_JSON")
           
-          # Extract and validate YAML content
-          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g')
+          HTTP_STATUS=$(printf '%s' "$RESPONSE" | tail -n1)
+          RESPONSE_BODY=$(printf '%s' "$RESPONSE" | head -n-1)
           
-          # Save YAML content
-          echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          echo "$YAML_CONTENT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          if [ "$HTTP_STATUS" != "200" ]; then
+            printf '%s\n' "Error: API request failed with status $HTTP_STATUS"
+            printf '%s\n' "Response: $RESPONSE_BODY"
+            exit 1
+          fi
+          
+          if printf '%s' "$RESPONSE_BODY" | jq -e '.error' >/dev/null; then
+            printf '%s\n' "Error: API returned an error:"
+            printf '%s\n' "$RESPONSE_BODY" | jq -r '.error.message'
+            exit 1
+          fi
+          
+          YAML_CONTENT=$(printf '%s' "$RESPONSE_BODY" \
+            | jq -r '.choices[0].message.content' \
+            | sed 's/```yaml//g; s/```//g')
+          
+          if [ -z "$YAML_CONTENT" ]; then
+            printf '%s\n' "Error: No YAML content generated"
+            exit 1
+          fi
+          
+          # Store the raw YAML in an output variable for the next step
+          printf '%s\n' "yaml_content<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$YAML_CONTENT" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "EOF" >> "$GITHUB_OUTPUT"
 
-      - name: Save YAML to lake directory
-        if: success()
+      - name: Save YAML to lake directory (post-processing)
+        if: env.valid_url == 'true'
         run: |
+          # Remove any leading blank line(s) from the ChatGPT output
+          CLEANED_YAML=$(printf '%s\n' "${{ steps.chatgpt_response.outputs.yaml_content }}" | sed -e ':a;/^$/N;/^\n$/d;ba')
+          
           mkdir -p lake
-          echo "${{ steps.generate_yaml.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
+          printf '%s\n' "$CLEANED_YAML" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
           
       - name: Commit and push changes
-        if: success()
+        if: env.valid_url == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
