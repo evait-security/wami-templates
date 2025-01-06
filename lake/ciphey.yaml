@@ -1,14 +1,22 @@
 id: ciphey
-title: Ciphey - Automatically Decrypt Encryptions, Decode Encodings, and Crack Hashes
+title: Ciphey - Automatically decrypt encryptions without knowing the key or cipher, decode encodings, and crack hashes
 tags:
-  - pentest
+  - python
+  - cryptography
+  - encoding_protocol
   - decryption
-  - decoding
-  - cracking
-  - open-source
-  - artificial-intelligence
-description: Ciphey is a fully automated decryption/decoding/cracking tool using natural language processing & artificial intelligence. It can decrypt text without knowing the key or cipher, decode encodings, and crack hashes. It uses a custom built artificial intelligence module (AuSearch) with a Cipher Detection Interface to approximate what something is encrypted with, and a custom-built natural language processing Language Checker Interface, which can detect when the given text becomes plaintext.
+  - brute_force
+  - hash_cracking
+  - security_feature
+  - steganography
+  - machine_learning
+  - natural_language_processing
+  - multi_os_support
+  - API_integration
+  - command_line_tool
+  - password_cracking
+  - reverse_engineering
 references:
   - https://github.com/Ciphey/Ciphey
+description: Ciphey is a versatile tool designed to automatically decrypt encryptions without knowing the key or cipher, decode encodings, and crack hashes. It incorporates elements of cryptography, brute force techniques, hash cracking, and steganography, and leverages machine learning and natural language processing for enhanced performance. It is a command-line tool with API integration capability, suitable for reverse-engineering and security testing.
 why_not:
-  -
