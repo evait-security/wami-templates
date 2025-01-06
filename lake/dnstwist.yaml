@@ -1,18 +1,22 @@
 id: dnstwist
-title: dnstwist - domain fuzzing algorithms
+title: Dnstwist - Domain name permutation engine for detecting homograph phishing attacks, typo squatting, and brand impersonation
 tags:
-  - pentest
-  - fuzzing
-  - permutations
+  - python
   - dns
-  - dictionary
-  - export-csv
-  - export-json
-  - ms-host-detection
-  - geoip-location
-description: See what sort of trouble users can get in trying to type your domain name. Find lookalike domains that adversaries can use to attack you. Can detect typosquatters, phishing attacks, fraud, and brand impersonation. Useful as an additional source of targeted threat intelligence. DNS fuzzing is an automated workflow that aims to uncover potentially malicious domains that target your organization. This tool generates a comprehensive list of permutations based on a provided domain name, and subsequently verifies whether any of these permutations are in use. Additionally, it can generate fuzzy hashes of web pages to detect ongoing phishing attacks or brand impersonation, and much more!
+  - phishing_detection
+  - typo_squatting
+  - brand_impersonation
+  - ssl_integration
+  - idn_homograph_attack
+  - fuzzing
+  - threading
+  - dnssec
+  - geoip
+  - tld_expansion
+  - mx_checking
+  - ssdeep
+  - detection_engine
 references:
   - https://github.com/elceef/dnstwist
-  - https://dnstwist.it/
-why_not:
-  -
+description: Dnstwist that allows you to detect phishing, typo squatters, and attack domains that are based on an inputted domain. It can generate a wide range of domain variants, analyze the responses, and report the results.
+why_not: 
