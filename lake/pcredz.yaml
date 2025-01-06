@@ -1,14 +1,23 @@
 id: pcredz
-title: PCredz
+title: PCredz - Extracts sensitive information from a pcap file or live interface
 tags:
-  - pentest
-  - pcap
-  - tcpdump
-  - credentials
-  - packet-capture
-description: This tool extracts Credit card numbers, NTLM(DCE-RPC, HTTP, SQL, LDAP, etc), Kerberos (AS-REQ Pre-Auth etype 23), HTTP Basic, SNMP, POP, SMTP, FTP, IMAP, etc from a pcap file or from a live interface. There is also an early-stage rust port of this tool called pcrust.
+  - python
+  - http
+  - ntlm
+  - ldap
+  - sql
+  - kerberos
+  - http_basic
+  - snmp
+  - pop
+  - smtp
+  - ftp
+  - imap
+  - extraction_tool
+  - network_monitoring
+  - security_tool
+  - traffic_analysis
 references:
   - https://github.com/lgandx/PCredz
-  - https://github.com/keogami/pcrust
-why_not:
-  -
+description: PCredz is a security tool that extracts sensitive data like credit card numbers, NTLM, Kerberos, HTTP Basic, SNMP, POP, SMTP, FTP, and IMAP from a pcap file or a live network interface. It focuses on extracting and analyzing various types of data that can be found in network traffic for security monitoring and threat detection.
+why_not: 
