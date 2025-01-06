@@ -1,19 +1,33 @@
 id: smbcrawler
-title: SmbCrawler - A robust tool for traversing through shared data
+title: SmbCrawler - A tool for crawling through specified hosts or shares
 tags:
-  - python
-  - network_security
-  - crawling
-  - spiders
-  - permissions_check
+  Technical Core:
+  - Python
+  - smb
+  - ntlm
+
+  Main Features:
+  - permissions_checking
+  - customizable_crawling_depth
   - report_generation
+
+  Implementation Details:
+  - cross-platform
+  - Python_packaging
+  - thread-based_crawling
+  - ip_based_targeting
+
+  Security and Performance:
   - pass-the-hash_support
-  - auto-download_files
-  - potential_secrets_reporting
-  - threaded
-  - pausable
-  - share_skip
+  - auto-download_secrets_detection
+  - pausable_execution
+
+  Additional Context:
+  - interactive skipping
+  - integration_with_nmap
+  - IP_ranges_input_acceptance
+
 references:
   - https://github.com/SySS-Research/smbcrawler
-description: SmbCrawler is a strong, straightforward tool designed to accept credentials and a host list as its inputs and to reliably crawl or spider through the involved shares. It allows for enhancements like checking permissions (with 'write' permissions given the green light only when opted in, considering creating an empty directory on the share is required for it), customization of crawling depth, and outputting results in machine-readable formats or as an HTML report that enables interactive usage. SmbCrawler also supports pass-the-hash, auto-downloading of intriguing files, reporting potential secrets, and is threaded, pausable, and enables interactive skipping of individual shares and hosts.
+description: SmbCrawler is a no-nonsense tool that takes credentials and a list of hosts and crawls or spiders through those shares. It takes hostnames, IP addresses, IP ranges, or an nmap xml file as input while checking permissions. The crawling depth is customizable and results are output in machine-readable formats or as an interactive HTML report. It has interactive features for skipping single hosts or shares, and thoroughly checks for potential secrets with pass-the-hash support.
 why_not: 
