@@ -1,0 +1,22 @@
+id: davrelayup
+title: DavRelayUp - A universal no-fix local privilege escalation in domain-joined windows workstations where LDAP signing is not enforced (the default settings)
+tags:
+  - c++
+  - ldap
+  - privilege_escalation
+  - windows_workstations
+  - default_settings
+  - local_attack
+  - no-fix
+  - universal_attack
+  - domain_joined
+  - protocol_violation
+  - technical_capability
+  - operational_characteristics
+  - deployment_details
+  - integration_capabilities
+  - usage_patterns
+references:
+  - https://github.com/Dec0ne/DavRelayUp
+description: DavRelayUp is a tool that exploits a no-fix local privilege escalation happening in domain-joined windows workstations where LDAP signing is not enforced. This is possible due to the default settings that are susceptible to protocol violations leading to successful attacks.
+why_not: ""
