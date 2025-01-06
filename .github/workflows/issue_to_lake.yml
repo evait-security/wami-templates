@@ -97,37 +97,28 @@ jobs:
         run: |
           # Using heredoc for the prompt template
           cat << 'EOF' > prompt.txt
+          # Using heredoc for the prompt template
+          cat << 'EOF' > prompt.txt
           Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
 
           id: lowercase_repository_name
           title: RepositoryName - Brief one-line description
           tags:
-            Technical Core:
-            - primary_programming_language
-            - technical_protocols_used (e.g., smb, http, ldap)
-            - specific_standards (e.g., ntlm, kerberos)
-            
-            Main Features:
+            - programming_language_used
+            - core_protocol_or_standard
+            - authentication_protocol
             - primary_purpose
-            - core_functionalities
-            - specific_technical_features
-            
-            Implementation Details:
-            - target_platform_or_system
+            - core_functionality_1
+            - core_functionality_2
+            - technical_feature_1
+            - technical_feature_2
+            - platform_or_system
             - implementation_approach
-            - key_dependencies
-            - architecture_aspects
-            
-            Security and Performance:
-            - security_context
-            - authentication_methods
-            - performance_characteristics
-            
-            Additional Context:
-            - domain_specific_terms
-            - usage_patterns
-            - integration_aspects
-
+            - performance_aspect
+            - security_feature_1
+            - security_feature_2
+            - integration_capability
+            - usage_pattern
           references:
             - repository_url
             - additional_urls
@@ -135,16 +126,16 @@ jobs:
           why_not: Alternative tool suggestion or empty string
 
           Tag Generation Rules:
-          - Include at least 15 specific, descriptive tags
-          - Always include the core protocol or standard if applicable (e.g., smb, ldap, http)
-          - Specify both the programming language and any key frameworks
-          - Include authentication and security-related protocol tags
-          - Add specific technical capability tags
-          - Include operation mode tags (e.g., threaded, async)
-          - Add data handling and storage tags
-          - Include integration and compatibility tags
-          - Add performance and scalability tags
-          - Include usage context and environment tags
+          - Include at least 15 specific, descriptive tags in a flat list
+          - Always include core protocols (e.g., smb, ldap, http)
+          - Always include the programming language
+          - Include authentication methods when relevant
+          - Include specific technical capabilities
+          - Add security features and protocols
+          - Include operational characteristics (e.g., threaded, async)
+          - Add implementation and deployment details
+          - Include integration capabilities
+          - Add usage patterns and contexts
 
           General Rules:
           - Generate pure YAML only, no meta-comments or notes
@@ -153,6 +144,7 @@ jobs:
           - No quotes unless absolutely necessary
           - Keep title as a single continuous line
           - Description should be a single paragraph without line breaks
+          - Tags must be in a simple flat list without categories
           EOF
           
           # Create request body
