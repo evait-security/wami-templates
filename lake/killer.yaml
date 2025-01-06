@@ -1,0 +1,24 @@
+id: killer
+title: Killer - Bypass AV/EDR security tools using various evasive techniques
+tags:
+  - python
+  - evasion_techniques
+  - bypass_av
+  - bypass_edr
+  - security_tool
+  - evasion_tool
+  - operational_threaded
+  - implementation_evasive
+  - http
+  - smb
+  - ldap
+  - authentication_relevant
+  - technical_capabilities
+  - security_features
+  - integration_capabilities
+  - usage_patterns
+  - deployment_details
+references:
+  - https://github.com/0xHossam/Killer
+description: Killer is a simple tool designed to bypass AV/EDR security tools using various evasive techniques.
+why_not: 
