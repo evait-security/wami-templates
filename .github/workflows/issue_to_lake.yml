@@ -138,41 +138,27 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -d "$REQUEST_JSON")
           
-          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
-          RESPONSE_BODY=$(echo "$RESPONSE" | head -n-1)
-          
-          if [ "$HTTP_STATUS" != "200" ]; then
-            echo "Error: API request failed with status $HTTP_STATUS"
-            echo "Response: $RESPONSE_BODY"
-            exit 1
-          fi
-          
-          # Safe YAML content extraction
-          if echo "$RESPONSE_BODY" | jq -e '.error' >/dev/null; then
-            echo "Error: API returned an error:"
-            echo "$RESPONSE_BODY" | jq -r '.error.message'
-            exit 1
-          fi
-          
-          YAML_CONTENT=$(echo "$RESPONSE_BODY" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g')
+          # Clean up and safely handle YAML content
+          YAML_CONTENT=$(echo "$RESPONSE_BODY" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g' | sed '/^$/d')
           
           if [ -z "$YAML_CONTENT" ]; then
             echo "Error: No YAML content generated"
             exit 1
           fi
           
-          # Safe output of YAML content
-          echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          printf '%s/n' "$YAML_CONTENT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # Safe output of YAML content with proper newline handling
+          {
+            echo "yaml_content<<EOF"
+            printf '%b' "$YAML_CONTENT"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Save YAML to lake directory
         if: env.valid_url == 'true'
         run: |
           mkdir -p lake
-          cat > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml" <<EOF
-          ${{ steps.chatgpt_response.outputs.yaml_content }}
-          EOF
+          # Sicheres Speichern der YAML-Datei
+          printf '%b' "${{ steps.chatgpt_response.outputs.yaml_content }}" > "lake/${{ steps.fetch_metadata.outputs.repo_name }}.yaml"
           
       - name: Commit and push changes
         if: env.valid_url == 'true'
