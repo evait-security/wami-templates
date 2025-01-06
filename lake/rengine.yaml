@@ -1,0 +1,22 @@
+id: rengine
+title: reNgine - An automated reconnaissance framework for web applications
+tags:
+  - python
+  - http
+  - owasp
+  - reconnaissance
+  - penetration_testing
+  - data_correlation
+  - continuous_monitoring
+  - web_interface
+  - streamlined_processes
+  - configurable
+  - web_applications
+  - automation
+  - correlation
+  - user_interface
+  - reconnaissance_workflow
+references:
+  - https://github.com/yogeshojha/rengine
+description: reNgine is an automated reconnaissance framework for web applications with a focus on highly configurable streamlined recon process via Engines, recon data correlation and organization, continuous monitoring, backed by a database, and simple yet intuitive User Interface. reNgine makes it easy for penetration testers to gather reconnaissance with minimal configuration and with the help of reNgine's correlation, it just makes recon effortless.
+why_not: ""
