@@ -128,21 +128,22 @@ jobs:
           id: lowercase_repository_name
           title: RepositoryName - Brief one-line description
           tags:
-            - programming_language_used
-            - core_protocol_or_standard
-            - authentication_protocol
-            - primary_purpose
+            - primary_purpose_1
+            - primary_purpose_2
+            - secondary_purpose_1
+            - secondary_purpose_2
             - core_functionality_1
             - core_functionality_2
+            - core_functionality_3
+            - core_functionality_4
             - technical_feature_1
             - technical_feature_2
-            - platform_or_system
-            - implementation_approach
-            - performance_aspect
+            - technical_feature_3
+            - technical_feature_4
             - security_feature_1
             - security_feature_2
-            - integration_capability
-            - usage_pattern
+            - security_feature_3
+            - security_feature_4
           references:
             - repository_url
             - additional_urls
