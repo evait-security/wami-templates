@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/wireshark/wireshark
 description: Wireshark is a widely-used network protocol analyzer which lets you see what's happening on your network at a microscopic level. It is used for network troubleshooting, analysis, software and communications protocol development. It is the de facto (and often de jure) standard across many industries and educational institutions.
-why_not: tcpdump
+why_not:
+  - tcpdump
