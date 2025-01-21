@@ -20,3 +20,4 @@ references:
   - https://github.com/sqlmapproject/sqlmap
 description: SQLMap is automatic SQL Injection tool designed to exploit database security vulnerabilities, extract data, and takeover databases. This powerful Python-based tool automates the process of detecting and exploiting SQL Injection vulnerabilities and taking over of database servers.
 why_not: 
+  - 

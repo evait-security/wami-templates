@@ -22,3 +22,4 @@ references:
   - https://github.com/Helixo32/NimBlackout
 description: NimBlackout is designed to disable antivirus and endpoint detection and response systems by leveraging the Bring Your Own Vulnerability Disclosure attack framework. While it primarily targets Windows systems, the tool also includes capabilities for lateral movement, obfuscation, and quick execution. It's standalone and designed for high damage, fast execution attacks.
 why_not: 
+  - 

@@ -20,3 +20,4 @@ references:
   - https://github.com/ihebski/DefaultCreds-cheat-sheet
 description: This repository serves as a dive stock for all the default credentials used in various systems to assist the Blue or Red teamers activities on finding devices with default passwords. It ensures to provide an extensive databank of passwords for network security and credentials verification.
 why_not: 
+  - 

@@ -20,4 +20,5 @@ tags:
 references:
   - https://github.com/qeeqbox/social-analyzer
 description: API, CLI, and web application for analyzing and finding a person's profile across 1000 social media websites. It allows users to quickly gather and visualize profile data across various platforms, making it an excellent tool for social media research and analysis.
-why_not: ''
+why_not: 
+  - 

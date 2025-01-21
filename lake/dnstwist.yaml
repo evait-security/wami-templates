@@ -20,3 +20,4 @@ references:
   - https://github.com/elceef/dnstwist
 description: Dnstwist that allows you to detect phishing, typo squatters, and attack domains that are based on an inputted domain. It can generate a wide range of domain variants, analyze the responses, and report the results.
 why_not: 
+  - 

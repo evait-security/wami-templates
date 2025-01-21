@@ -20,3 +20,4 @@ references:
   - https://github.com/Ciphey/Ciphey
 description: Ciphey is a versatile tool designed to automatically decrypt encryptions without knowing the key or cipher, decode encodings, and crack hashes. It incorporates elements of cryptography, brute force techniques, hash cracking, and steganography, and leverages machine learning and natural language processing for enhanced performance. It is a command-line tool with API integration capability, suitable for reverse-engineering and security testing.
 why_not:
+  - 

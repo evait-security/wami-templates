@@ -20,3 +20,4 @@ references:
   - https://github.com/SySS-Research/smbcrawler
 description: smbcrawler is a no-nonsense tool that takes credentials and a list of hosts and crawls (or spiders) through those shares, demonstrating how a threat actor or penetration tester might gather information and retrieve files from multiple hosts across a network.
 why_not: 
+  - 

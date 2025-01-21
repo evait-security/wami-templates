@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/NH-RED-TEAM/RustHound
 description: RustHound is an Active Directory data ingestor for BloodHound Legacy. This tool is made in Rust, possesses data mining capability and integration features, provides analysis of data through BloodHound Legacy, includes security protocols and has implementation details and usage patterns worth checking out.
-why_not: ""
+why_not: 
+  - 

@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/frkngksl/NimExec
 description: NimExec is a fileless command execution tool designed for lateral movement in an Active Directory environment. It leverages the Nim programming language's capability to execute SMB and process injection capabilities without dropping any payload to disk. It uses NTLM for authentication and is intended for security testing.
-why_not: ""
+why_not: 
+  - 

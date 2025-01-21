@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/keogami/pcrust
 description: PCrust is a rust port of PCredz which is a tool that extracts Credentials and other types of data from network traffic. Useful tool for network forensic analysis and network monitoring. It is designed to function on pcap files and not for live capture.
-why_not: ''
+why_not: 
+  - 

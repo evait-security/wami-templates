@@ -20,3 +20,4 @@ references:
   - https://github.com/BlackSnufkin/GhostDriver
 description: GhostDriver is a Python-based AV killer tool designed to work using your own virtual desktop, known as BYOVD offering powerful capabilities like memory scraping and credential stealing. It operates across platforms, providing low-latency, secure communication with strong encryption. It is designed for seamless integration and stealthy operation.
 why_not: 
+  - 

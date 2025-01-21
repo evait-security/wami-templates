@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/kulkansecurity/gitxray
 description: GitXray is a powerful and versatile security tool that utilizes the GitHub's public REST APIs to conduct open source intelligence (OSINT), forensics and pentesting operations effectively and efficiently. 
-why_not: 
+why_not:
+  -  

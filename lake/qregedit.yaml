@@ -20,4 +20,5 @@ references:
   - https://github.com/kernel1024/qregedit
   - ''
 description: QRegEdit is a Windows registry editor written with Qt. It is based on chntpw code and focuses primarily on providing tools for password recovery and offline editing of Windows registry. The project uses the SMB protocol and focuses on providing a cross-platform solution, including direct registry manipulation for disaster recovery in Windows systems.
-why_not: ''
+why_not: 
+  - 

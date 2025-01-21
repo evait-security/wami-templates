@@ -20,3 +20,4 @@ references:
   - https://github.com/darkoperator/dnsrecon
 description: dnsrecon is a Python-based tool designed to provide DNS enumeration capabilities for security examinations and data collection. It allows for DNS inspection and data enumeration, making it beneficial for penetration testing, reconnaissance, and threat hunting activities.
 why_not: 
+  - 

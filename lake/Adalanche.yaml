@@ -20,3 +20,4 @@ references:
   - https://github.com/lkarlslund/Adalanche
 description: Adalanche is a tool that offers visualization and exploration of Active Directory Access Control Lists (ACLs). Its core functionality focuses on identifying the real Domain Administrators in a network. Commercial versions of the tool are available from NetSection.
 why_not:
+  - 

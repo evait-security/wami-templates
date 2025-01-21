@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/safedv/RustiveDump
 description: RustiveDump is a Rust-based tool for dumping the memory of the lsass.exe process using only NT system calls. It creates a minimal minidump file containing essential components such as SystemInfo, ModuleList, and Memory64List, with support for XOR encryption and remote transmission. The tool can also be compiled as Position Independent Code (PIC), adding to its versatility.
-why_not: ''
+why_not: 
+  - 

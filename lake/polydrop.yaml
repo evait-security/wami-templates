@@ -27,4 +27,5 @@ tags:
 references:
   - https://github.com/MalwareSupportGroup/PolyDrop
 description: PolyDrop is a Bring-Your-Own-Script-Interpreter (BYOSI) Rapid Payload Deployment Toolkit. The tool leverages trusted applications to deliver a script interpreter to a system and executes malicious source code via the interpreter. It uses multiple scripting languages for the attack, most of which are ignored by AV vendors. PolyDrop is compatible with Windows, Mac, and Linux systems.
-why_not: ''
+why_not: 
+  - 

@@ -20,4 +20,6 @@ references:
   - https://github.com/CICADA8-Research/RemoteKrbRelay
   - https://blackhat.com/asia-24/briefings/schedule/#certifieddcom--the-privilege-escalation-journey-to-domain-admin-with-dcom-37519
 description: RemoteKrbRelay is an advanced Kerberos Relay Framework designed to simplify remote execution and magnify the power of Kerberos Relay methods. It uses Python to implement a potent authentication system, packed with unique features such as privilege escalation and secure communication. Ensuring optimal performance and effective system integration, it stands as a significant contribution to distributed computing methods.
-why_not: krbrelay, krbrelayup
+why_not: 
+  - krbrelay
+  - krbrelayup

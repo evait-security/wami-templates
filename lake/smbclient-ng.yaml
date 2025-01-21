@@ -21,3 +21,4 @@ references:
   - https://github.com/p0dalirius/smbclient-ng
 description: smbclient-ng is a fast and user-friendly way to interact with SMB shares. This Python-based client allows remote file management and network file transfer over SMB. Highly multiplatform, it offers a variety of network protocols and authentication methods, with technical capabilities such as threading and async operations. Detailed deployment instructions and usage patterns are available for integration into various contexts.
 why_not: 
+  - 

@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/Offensive-Panda/ShadowDumper
 description: Shadow Dumper is a powerful tool used to dump LSASS memory, often needed in penetration testing and red teaming. It uses multiple advanced techniques to dump memory, allowing to access sensitive data in LSASS memory.
-why_not: Mimikatz
+why_not: 
+  - Mimikatz
