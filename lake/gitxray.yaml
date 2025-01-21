@@ -1,0 +1,22 @@
+id: gitxray
+title: GitXray - A multifaceted security tool which leverages Public GitHub REST APIs for OSINT, Forensics, Pentesting and more.
+tags:
+  - osint
+  - forensics
+  - pentesting
+  - security-scanning
+  - github-apis
+  - rest-apis
+  - information-gathering
+  - penetration-testing
+  - public-apis
+  - security-tool
+  - smb
+  - ldap
+  - http
+  - python
+  - oauth
+references:
+  - https://github.com/kulkansecurity/gitxray
+description: GitXray is a powerful and versatile security tool that utilizes the GitHub's public REST APIs to conduct open source intelligence (OSINT), forensics and pentesting operations effectively and efficiently. 
+why_not: 
