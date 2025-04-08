@@ -1,0 +1,22 @@
+id: hash-sentinel
+title: HashSentinel - Hash analyzing tool
+tags:
+  - hash_analysis
+  - cryptography
+  - http
+  - smb
+  - ldap
+  - python
+  - password_compatibility_check
+  - hash_types_identification
+  - security_audit
+  - intrusion_detection
+  - ssl_tls
+  - encryption_standards
+  - threaded
+  - command-line_tool
+  - system_integration
+references:
+  - https://github.com/evait-security/hash-sentinel
+description: HashSentinel is a hashed data analyzing tool that assists in password compatibility checks and identifying hash types. It supports prominent security protocols like SMB, LDAP, SSL/TLS, and various encryption standards, enhancing its ability to audit security and detect intrusions. Designed using Python, it can be utilized as a command-line tool, demonstrating operability in threaded environments and showing noticeable integration potentials with other systems.
+why_not: 
