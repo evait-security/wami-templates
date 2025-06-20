@@ -1,0 +1,23 @@
+id: pretender
+title: Pretender - Your MitM sidekick for relaying attacks featuring DHCPv6 DNS takeover as well as mDNS, LLMNR and NetBIOS-NS spoofing.
+tags:
+  - MitM-attacks
+  - DHCPv6-DNS-takeover
+  - mDNS-spoofing
+  - LLMNR-spoofing
+  - NetBIOS-NS-spoofing
+  - smb
+  - ldap
+  - http
+  - python
+  - authentication-methods
+  - technical-capabilities
+  - security-features
+  - operational-characteristics
+  - deployment-details
+  - integration-capabilities
+  - usage-patterns
+references:
+  - https://github.com/RedTeamPentesting/pretender
+description: Pretender is a tool developed by RedTeamPentesting for Man-in-the-Middle attacks featuring DHCPv6 DNS takeover as well as mDNS, LLMNR and NetBIOS-NS spoofing. This tool is essential for penetration testing scenarios where it is necessary to redirect network traffic or take over network functions.
+why_not: 
