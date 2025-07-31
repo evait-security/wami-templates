@@ -1,0 +1,22 @@
+id: sharpcollection
+title: SharpCollection - Nightly builds of common C# offensive tools
+tags:
+  - security_tooling
+  - Csharp_programming
+  - azure_devops
+  - continuous_deployment
+  - release_pipeline
+  - master_branches
+  - offensive_security
+  - http_protocol
+  - smb_protocol
+  - ldap_protocol
+  - authentication_methods
+  - technical_capabilities
+  - security_protocols
+  - operational_characteristics
+  - deployment_details
+references:
+  - https://github.com/Flangvik/SharpCollection
+description: Nightly builds of common C# offensive tools, fresh from their respective master branches built and released in a CDI fashion using Azure DevOps release pipelines.
+why_not: ''
