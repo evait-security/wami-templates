@@ -149,7 +149,7 @@ jobs:
             - additional_urls
           description: Single paragraph description without any YAML special characters or formatting indicators
           why_not: 
-            - Alternative tool suggestion or empty string
+            - Alternative tool suggestion or empty
 
           Tag Generation Rules:
           - Include at least 15 specific, descriptive tags in a flat list
