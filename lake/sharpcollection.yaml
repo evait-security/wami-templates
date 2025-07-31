@@ -19,4 +19,5 @@ tags:
 references:
   - https://github.com/Flangvik/SharpCollection
 description: Nightly builds of common C# offensive tools, fresh from their respective master branches built and released in a CDI fashion using Azure DevOps release pipelines.
-why_not: ''
+why_not: 
+  -
