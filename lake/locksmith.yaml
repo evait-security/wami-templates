@@ -3,21 +3,18 @@ title: Locksmith - A small tool built to find and fix common misconfigurations i
 tags:
   - locksmith
   - active_directory_certificate_services
-  - misconfiguration_finding
-  - misconfiguration_fixing
-  - smb
+  - active_directory
+  - adcs
   - ldap
-  - http
-  - authentication_methods
-  - technical_capabilities
-  - security_features
-  - security_protocols
-  - operational_characteristics
-  - implementation_details
-  - deployment_details
-  - integration_capabilities
-  - usage_patterns
-  - contexts
+  - certificate
+  - windows
+  - active_directory
+  - ad
+  - esc
+  - esc8
+  - esc15
+  - esc7
+  - esc2
 references:
   - https://github.com/jakehildreth/Locksmith
 description: A small tool built to find and fix common misconfigurations in Active Directory Certificate Services.
