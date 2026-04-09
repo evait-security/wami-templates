@@ -229,7 +229,6 @@ jobs:
             exit 1
           fi
           
-          # Schreibe direkt aus der Variable in die Datei
           echo "$YAML_CONTENT" > "lake/${YAML_ID}.yaml"
           
       - name: Commit and push changes
