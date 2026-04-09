@@ -1,0 +1,26 @@
+id: kovid
+title: KoviD - Linux Kernel Module rootkit for red-team research and defensive security
+tags:
+  - linux
+  - kernel-module
+  - rootkit
+  - red-team
+  - security-research
+  - lkm
+  - c
+  - kernel-hooking
+  - process-hiding
+  - file-hiding
+  - network-hiding
+  - privilege-escalation
+  - defensive-security
+  - system-calls
+  - netfilter
+  - stealth
+  - persistence
+references:
+  - https://github.com/carloslack/KoviD
+description: KoviD is an open-source Linux Kernel Module rootkit designed for educational purposes and defensive security research to help professionals understand kernel-level threats. It implements various stealth techniques such as process and file hiding to demonstrate how rootkits operate within the Linux kernel environment. By providing a transparent implementation of these methods, the project enables system administrators and security researchers to develop better detection and mitigation strategies against real-world kernel-level attacks.
+why_not:
+  - Reptile
+  - Diamorphine
