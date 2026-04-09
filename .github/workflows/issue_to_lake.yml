@@ -190,7 +190,7 @@ jobs:
           # Make API request to Google Gemini API
           RESPONSE=$(curl -s -H "Content-Type: application/json" \
             -d "$REQUEST_JSON" \
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=$GEMINI_API_KEY")
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY")
           
           # Check for API Errors
           if [ "$(echo "$RESPONSE" | jq -r 'has("error")')" = "true" ]; then
