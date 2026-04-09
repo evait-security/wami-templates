@@ -14,13 +14,10 @@ jobs:
       
       - name: Extract GitHub URL
         id: extract_url
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
-          # Using heredoc to safely handle multiline strings
-          cat << 'EOF' > extract_url.sh
-          ISSUE_TITLE="${{ github.event.issue.title }}"
-          ISSUE_BODY="${{ github.event.issue.body }}"
-          
-          # Search for GitHub URLs in title and body
           GITHUB_URL=$(printf '%s %s' "$ISSUE_TITLE" "$ISSUE_BODY" | grep -o 'https://github.com/[a-zA-Z0-9._-]*/[a-zA-Z0-9._-]*' | head -n 1)
           
           if [ -z "${GITHUB_URL}" ]; then
@@ -29,18 +26,13 @@ jobs:
           fi
           
           echo "url=${GITHUB_URL}" >> $GITHUB_OUTPUT
-          EOF
-          
-          chmod +x extract_url.sh
-          ./extract_url.sh
 
       - name: Fetch repository metadata
         id: fetch_metadata
         if: success()
+        env:
+          GITHUB_URL: ${{ steps.extract_url.outputs.url }}
         run: |
-          # Using heredoc to safely handle multiline strings
-          cat << 'EOF' > fetch_metadata.sh
-          GITHUB_URL="${{ steps.extract_url.outputs.url }}"
           OWNER_REPO=$(echo "$GITHUB_URL" | sed 's|https://github.com/||')
           
           # Fetch repository info
@@ -68,19 +60,12 @@ jobs:
               if [ "$HTTP_CODE" = "200" ]; then
                 # Fetch and clean README content
                 README_CONTENT=$(curl -s "$README_URL" | sed -E '
-                  # Remove HTML tags
                   s/<[^>]*>//g;
-                  # Remove image references
                   s/!\[[^]]*\]([^)]*))//g;
-                  # Remove badges
                   s/\[[^]]*\]\(https:\/\/img\.shields\.io[^)]*\)//g;
-                  # Remove empty lines at start of file
                   /./,$!d;
-                  # Remove multiple empty lines
                   /^$/N;/^\n$/D;
-                  # Remove special characters
                   s/[[:cntrl:]]//g;
-                  # Remove links but keep text
                   s/\[([^]]*)\]\([^)]*\)/\1/g;
                 ')
                 
@@ -96,10 +81,10 @@ jobs:
           else
             # Additional cleaning and verification
             README_CONTENT=$(echo "$README_CONTENT" | awk '
-              NR==1{if($0~/^[[:space:]]*$/){next}}  # Skip if first line is empty
-              {gsub(/\r/,"")}                       # Remove carriage returns
-              {gsub(/^[[:space:]]+|[[:space:]]+$/,"")} # Trim whitespace
-              length>0{print}                       # Only print non-empty lines
+              NR==1{if($0~/^[[:space:]]*$/){next}}
+              {gsub(/\r/,"")}
+              {gsub(/^[[:space:]]+|[[:space:]]+$/,"")}
+              length>0{print}
             ')
           fi
           
@@ -112,16 +97,17 @@ jobs:
             echo "${README_CONTENT:0:1000}"
             echo "EOF"
           } >> $GITHUB_OUTPUT
-          EOF
-          
-          chmod +x fetch_metadata.sh
-          ./fetch_metadata.sh
 
-      - name: Generate YAML
+      - name: Generate YAML mit Gemini
         id: generate_yaml
         if: success()
+        env:
+          REPO_NAME: ${{ steps.fetch_metadata.outputs.repo_name }}
+          REPO_DESC: ${{ steps.fetch_metadata.outputs.repo_desc }}
+          README_TEXT: ${{ steps.fetch_metadata.outputs.readme }}
+          GITHUB_URL: ${{ steps.extract_url.outputs.url }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          # Using heredoc for the prompt template
           cat << 'EOF' > prompt.txt
           Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
 
@@ -173,31 +159,39 @@ jobs:
           - Tags must be in a simple flat list without categories
           EOF
           
-          # Create request body
+          # Create request body for Gemini API using jq
           REQUEST_JSON=$(jq -n \
-            --arg model "gpt-4" \
             --arg system "You are a YAML generator that produces only pure YAML content. Do not include any explanatory text, comments, or notes about formatting. Output raw YAML content directly without any wrapper text or meta-commentary." \
             --arg prompt "$(cat prompt.txt)" \
-            --arg name "${{ steps.fetch_metadata.outputs.repo_name }}" \
-            --arg desc "${{ steps.fetch_metadata.outputs.repo_desc }}" \
-            --arg readme "${{ steps.fetch_metadata.outputs.readme }}" \
-            --arg url "${{ steps.extract_url.outputs.url }}" \
+            --arg name "$REPO_NAME" \
+            --arg desc "$REPO_DESC" \
+            --arg readme "$README_TEXT" \
+            --arg url "$GITHUB_URL" \
             '{
-              model: $model,
-              messages: [
-                {role: "system", content: $system},
-                {role: "user", content: ($prompt + "\n\nRepository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url)}
-              ]
+              systemInstruction: {
+                parts: [{ text: $system }]
+              },
+              contents: [{
+                parts: [{ text: ($prompt + "\n\nRepository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url) }]
+              }],
+              generationConfig: {
+                temperature: 0.1
+              }
             }')
           
-          # Make API request
+          # Make API request to Google Gemini API
           RESPONSE=$(curl -s -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -d "$REQUEST_JSON" \
-            "https://api.openai.com/v1/chat/completions")
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=$GEMINI_API_KEY")
           
-          # Extract and validate YAML content
-          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content' | sed 's/```yaml//g' | sed 's/```//g')
+          # Check for API Errors
+          if [ "$(echo "$RESPONSE" | jq -r 'has("error")')" = "true" ]; then
+            echo "::error::Gemini API Error: $(echo "$RESPONSE" | jq -r '.error.message')"
+            exit 1
+          fi
+          
+          # Extract and validate YAML content (Angepasster JSON Pfad für Gemini)
+          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed 's/```yaml//g' | sed 's/```//g')
           
           # Save YAML content
           echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
@@ -206,19 +200,28 @@ jobs:
 
       - name: Save YAML to lake directory
         if: success()
+        env:
+          YAML_CONTENT: ${{ steps.generate_yaml.outputs.yaml_content }}
         run: |
           mkdir -p lake
-          YAML_CONTENT="${{ steps.generate_yaml.outputs.yaml_content }}"
-          YAML_ID=$(echo "$YAML_CONTENT" | grep '^id:' | cut -d' ' -f2)
-          cat << 'YAMLEOF' > "lake/${YAML_ID}.yaml"
-          ${{ steps.generate_yaml.outputs.yaml_content }}
-          YAMLEOF
+          # Safe extraction
+          YAML_ID=$(echo "$YAML_CONTENT" | grep '^id:' | cut -d' ' -f2 | tr -d '\r')
+          
+          if [ -z "$YAML_ID" ]; then
+            echo "::error::Could not extract valid ID from YAML."
+            exit 1
+          fi
+          
+          # Schreibe direkt aus der Variable in die Datei
+          echo "$YAML_CONTENT" > "lake/${YAML_ID}.yaml"
           
       - name: Commit and push changes
         if: success()
+        env:
+          REPO_NAME: ${{ steps.fetch_metadata.outputs.repo_name }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add lake/
-          git commit -m "Add new program: ${{ steps.fetch_metadata.outputs.repo_name }}"
+          git commit -m "Add new program: $REPO_NAME"
           git push
