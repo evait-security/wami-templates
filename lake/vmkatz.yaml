@@ -1,0 +1,25 @@
+id: vmkatz
+title: VMkatz - Extract Windows credentials from virtual machine memory snapshots and disks
+tags:
+  - credential-dumping
+  - memory-forensics
+  - virtualization-security
+  - red-teaming
+  - ntlm
+  - kerberos
+  - dpapi
+  - vmdk
+  - vmsn
+  - python
+  - post-exploitation
+  - offline-analysis
+  - snapshot-parsing
+  - windows-security
+  - local-extraction
+  - smb
+references:
+  - https://github.com/nikaiw/VMkatz
+description: VMkatz is a specialized tool designed for red team engagements to extract Windows credentials directly from virtual machine memory snapshots and virtual disks without requiring full file exfiltration. It targets files such as vmdk, vmsn, and sav to retrieve NTLM hashes, DPAPI master keys, Kerberos tickets, and cached domain credentials locally. This approach is particularly effective when dealing with large virtual machine images over slow network connections where traditional exfiltration is impractical.
+why_not:
+  - mimikatz
+  - volatility
