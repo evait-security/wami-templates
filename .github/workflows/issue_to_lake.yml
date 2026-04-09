@@ -268,6 +268,6 @@ jobs:
 
       - name: Close Issue
         if: success()
-        run: gh issue close ${{ github.event.issue.number }} --comment "Abgeschlossen durch automatische Verarbeitung."
+        run: gh issue close ${{ github.event.issue.number }} --comment "Completed through automated processing"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
