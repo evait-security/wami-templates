@@ -1,0 +1,26 @@
+id: taskhound
+title: TaskHound - Windows Privileged Scheduled Task Discovery and Enumeration Tool
+tags:
+  - scheduled-tasks
+  - enumeration
+  - windows
+  - active-directory
+  - smb
+  - bloodhound-integration
+  - opengraph
+  - laps-integration
+  - dpapi-credentials
+  - privilege-escalation
+  - csharp
+  - remote-enumeration
+  - post-exploitation
+  - reconnaissance
+  - domain-admin-detection
+  - xml-parsing
+  - credential-harvesting
+  - multi-threaded
+references:
+  - https://github.com/1r0BIT/TaskHound
+description: TaskHound is a security tool designed to discover and enumerate Windows scheduled tasks that run with privileged accounts or stored credentials across remote systems. It utilizes SMB to access and parse task XML files identifying high-value targets such as Domain Admins or Enterprise Admins. The tool features deep integration with BloodHound for attack path visualization and supports LAPS for automated credential retrieval and authentication during the scanning process.
+why_not:
+  - SharpTasks
