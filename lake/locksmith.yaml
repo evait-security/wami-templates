@@ -1,22 +1,31 @@
 id: locksmith
-title: Locksmith - A small tool built to find and fix common misconfigurations in Active Directory Certificate Services
+title: Locksmith - Find and fix common misconfigurations in Active Directory Certificate Services
 tags:
-  - locksmith
-  - active_directory_certificate_services
-  - active_directory
+  - active-directory
   - adcs
+  - pki
+  - certificates
+  - powershell
+  - security-audit
+  - remediation
+  - misconfiguration
   - ldap
-  - certificate
-  - windows
-  - active_directory
-  - ad
-  - esc
-  - esc8
-  - esc15
-  - esc7
-  - esc2
+  - rpc
+  - dcom
+  - smb
+  - kerberos
+  - windows-server
+  - domain-joined
+  - vulnerability-scanning
+  - automation
+  - security-hardening
+  - certificate-authority
+  - synchronous
+  - red-teaming
+  - blue-teaming
 references:
-  - https://github.com/jakehildreth/Locksmith
-description: A small tool built to find and fix common misconfigurations in Active Directory Certificate Services.
-why_not: 
-  -
+  - https://github.com/LuemmelSec/Locksmith
+description: Locksmith is a specialized tool designed to identify and remediate common security misconfigurations within Active Directory Certificate Services environments by performing automated scans and providing fixing capabilities across multiple operational modes.
+why_not:
+  - Certipy
+  - PSPKIAudit
