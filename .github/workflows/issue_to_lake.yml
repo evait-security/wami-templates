@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
       - name: Extract GitHub URL
         id: extract_url
@@ -67,7 +67,7 @@ jobs:
                   /^$/N;/^\n$/D;
                   s/[[:cntrl:]]//g;
                   s/\[([^]]*)\]\([^)]*\)/\1/g;
-                ')
+                '
                 
                 if [ -n "$README_CONTENT" ]; then
                   break 2
