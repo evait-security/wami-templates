@@ -1,0 +1,24 @@
+id: defender-acl-blocker
+title: defender-acl-blocker - Disable Microsoft Defender user space components using ACL deny rules
+tags:
+  - go
+  - windows
+  - security
+  - defender
+  - acl
+  - access-control-list
+  - endpoint-protection
+  - obfuscation
+  - garble
+  - defense-evasion
+  - service-manipulation
+  - file-system-permissions
+  - command-line-tool
+  - elevated-privileges
+  - system-hardening
+  - malware-analysis
+references:
+  - https://github.com/lkarlslund/defender-acl-blocker
+description: A utility written in Go that disables Microsoft Defender user space components by applying deny Access Control List rules to specific files and services. It allows users to target specific DLLs or executables and manage service permissions to prevent the antivirus from functioning. The tool supports obfuscated builds using Garble and includes a removal feature to restore original permissions.
+why_not:
+  - Microsoft Defender Control
