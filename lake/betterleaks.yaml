@@ -1,0 +1,28 @@
+id: betterleaks
+title: Betterleaks - A high-performance secrets scanner for git repositories and files
+tags:
+  - go
+  - secrets-detection
+  - git
+  - regex
+  - security-scanning
+  - api-keys
+  - passwords
+  - tokens
+  - stdin-support
+  - entropy-analysis
+  - high-performance
+  - configurable
+  - static-analysis
+  - devsecops
+  - credential-scanning
+  - command-line-tool
+  - http
+  - ssh
+  - oauth
+references:
+  - https://github.com/betterleaks/betterleaks
+  - https://www.aikido.dev
+description: Betterleaks is a high-performance secrets scanner designed for detecting passwords API keys and tokens within git repositories local files and standard input. Built by the maintainers of Gitleaks it focuses on speed and configurability using a regex-based detection engine supplemented by entropy analysis to identify sensitive information. The tool provides detailed output including rule IDs commit history and author information to streamline the remediation process in security workflows.
+why_not:
+  - gitleaks
