@@ -1,0 +1,29 @@
+id: redteamgrimoire
+title: RedTeamGrimoire - A collection of advanced red teaming tools and evasion techniques
+tags:
+  - red-teaming
+  - penetration-testing
+  - malware-development
+  - evasion
+  - lsass-dumping
+  - process-hollowing
+  - shellcode-injection
+  - credential-exfiltration
+  - indirect-syscalls
+  - stack-weaving
+  - ppl-bypass
+  - obfuscation
+  - edr-evasion
+  - c-plus-plus
+  - windows-internals
+  - stealth
+  - http
+  - smb
+  - async
+  - threaded
+references:
+  - https://github.com/vari-sh/RedTeamGrimoire
+description: A collection of advanced red teaming tools and techniques designed for enterprise defense manipulation including LSASS dumping with PPL bypass process hollowing rituals and standalone builders for shellcode transport. The repository features specialized engines for dynamic indirect syscalls and synthetic stack weaving to facilitate stealthy credential exfiltration and payload execution while bypassing modern security defenses.
+why_not:
+  - Metasploit
+  - Cobalt Strike
