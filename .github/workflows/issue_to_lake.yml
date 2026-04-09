@@ -59,15 +59,18 @@ jobs:
               
               if [ "$HTTP_CODE" = "200" ]; then
                 # Fetch and clean README content
-                README_CONTENT=$(curl -s "$README_URL" | sed -E '
-                  s/<[^>]*>//g;
-                  s/!\[[^]]*\]([^)]*))//g;
-                  s/\[[^]]*\]\(https:\/\/img\.shields\.io[^)]*\)//g;
-                  /./,$!d;
-                  /^$/N;/^\n$/D;
-                  s/[[:cntrl:]]//g;
-                  s/\[([^]]*)\]\([^)]*\)/\1/g;
-                '
+                README_CONTENT=$(curl -s "$README_URL" | sed -E -f - <<'SED_SCRIPT'
+                s/<[^>]*>//g
+                s/!\[[^]]*\]\([^)]*\)//g
+                s/\[[^]]*\]\(https:\/\/img\.shields\.io[^)]*\)//g
+                /./,$!d
+                /^$/N;/^\n$/D
+                s/[[:cntrl:]]//g
+                s/\[\([^\]]*\)\](\([^\)]*\))/\1/g;
+                s/^[[:space:]]\+//g
+                s/[[:space:]]\+$//g
+                SED_SCRIPT
+                )
                 
                 if [ -n "$README_CONTENT" ]; then
                   break 2
