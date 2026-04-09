@@ -1,0 +1,26 @@
+id: bruteforceai
+title: BruteForceAI - Advanced LLM-powered brute-force tool combining AI intelligence with automated login attacks
+tags:
+  - python
+  - brute-force
+  - penetration-testing
+  - llm
+  - ai
+  - http
+  - https
+  - multi-threaded
+  - form-analysis
+  - automation
+  - web-security
+  - login-security
+  - html-parsing
+  - synchronized-delays
+  - red-teaming
+  - vulnerability-assessment
+references:
+  - https://github.com/MorDavid/BruteForceAI
+description: BruteForceAI is an advanced penetration testing tool that revolutionizes traditional brute-force attacks by integrating Large Language Models for intelligent form analysis. The tool automatically identifies login form selectors using AI and then executes sophisticated multi-threaded attacks with human-like behavior patterns to bypass security measures.
+why_not:
+  - hydra
+  - medusa
+  - burp-suite-intruder
