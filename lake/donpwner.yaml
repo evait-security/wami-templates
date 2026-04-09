@@ -1,0 +1,27 @@
+id: donpwner
+title: DonPwner - Advanced Domain Controller attack and credential analysis tool
+tags:
+  - python
+  - smb
+  - ldap
+  - active-directory
+  - password-spraying
+  - credential-analysis
+  - donpapi
+  - jitter
+  - delay
+  - secretsdump
+  - penetration-testing
+  - red-teaming
+  - account-lockout-prevention
+  - netexec
+  - authentication
+  - domain-controller
+  - automation
+references:
+  - https://github.com/MorDavid/donpwner
+  - https://mordavid.com/prompt
+description: DonPwner is an advanced penetration testing tool designed for credential analysis and domain controller attacks by leveraging DonPAPI database results. It features safe password spray attacks with smart delay and jitter mechanisms to prevent account lockouts while automatically removing successfully authenticated users from the target list. The tool also supports credential analysis against secretsdump files and integrates with common security tools like NetExec for comprehensive security assessments.
+why_not:
+  - netexec
+  - crackmapexec
