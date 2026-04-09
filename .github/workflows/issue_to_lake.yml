@@ -109,102 +109,109 @@ jobs:
       - name: Generate YAML mit Gemini
         id: generate_yaml
         if: success()
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 5
+          retry_wait_seconds: 45
+          shell: bash
+          command: |
+            cat << 'EOF' > prompt.txt
+            Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
+
+            id: lowercase_repository_name
+            title: RepositoryName - Brief one-line description
+            tags:
+              - primary_purpose_1
+              - primary_purpose_2
+              - secondary_purpose_1
+              - secondary_purpose_2
+              - core_functionality_1
+              - core_functionality_2
+              - core_functionality_3
+              - core_functionality_4
+              - technical_feature_1
+              - technical_feature_2
+              - technical_feature_3
+              - technical_feature_4
+              - security_feature_1
+              - security_feature_2
+              - security_feature_3
+              - security_feature_4
+            references:
+              - repository_url
+              - additional_urls
+            description: Single paragraph description without any YAML special characters or formatting indicators
+            why_not: 
+              - Alternative tool suggestion or empty
+
+            Tag Generation Rules:
+            - Include at least 15 specific, descriptive tags in a flat list
+            - Always include core protocols (e.g., smb, ldap, http)
+            - Always include the programming language
+            - Include authentication methods when relevant
+            - Include specific technical capabilities
+            - Add security features and protocols
+            - Include operational characteristics (e.g., threaded, async)
+            - Add implementation and deployment details
+            - Include integration capabilities
+            - Add usage patterns and contexts
+
+            General Rules:
+            - Generate pure YAML only, no meta-comments or notes
+            - No empty lines at start or end
+            - No YAML block indicators (>, |, etc.)
+            - No quotes unless absolutely necessary
+            - Keep title as a single continuous line
+            - Description should be a single paragraph without line breaks
+            - Tags must be in a simple flat list without categories
+            EOF
+            
+            REQUEST_JSON=$(jq -n \
+              --arg system "You are a YAML generator that produces only pure YAML content. Do not include any explanatory text, comments, or notes about formatting. Output raw YAML content directly without any wrapper text or meta-commentary." \
+              --arg prompt "$(cat prompt.txt)" \
+              --arg name "$REPO_NAME" \
+              --arg desc "$REPO_DESC" \
+              --arg readme "$README_TEXT" \
+              --arg url "$GITHUB_URL" \
+              '{
+                systemInstruction: {
+                  parts: [{ text: $system }]
+                },
+                contents: [{
+                  parts: [{ text: ($prompt + "\n\nRepository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url) }]
+                }],
+                generationConfig: {
+                  temperature: 0.1
+                }
+              }')
+            
+            RESPONSE=$(curl -s -H "Content-Type: application/json" \
+              -d "$REQUEST_JSON" \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY")
+            
+            if [ "$(echo "$RESPONSE" | jq -r 'has("error")')" = "true" ]; then
+              ERROR_MSG=$(echo "$RESPONSE" | jq -r '.error.message')
+              echo "::warning:: Gemini API Error: $ERROR_MSG - Versuche es erneut..."
+              exit 1
+            fi
+            
+            YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed 's/```yaml//g' | sed 's/```//g')
+            
+            if [ -z "$YAML_CONTENT" ] || [ "$YAML_CONTENT" == "null" ]; then
+              echo "::error:: Kein YAML Content erhalten."
+              exit 1
+            fi
+
+            echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
+            echo "$YAML_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
         env:
           REPO_NAME: ${{ steps.fetch_metadata.outputs.repo_name }}
           REPO_DESC: ${{ steps.fetch_metadata.outputs.repo_desc }}
           README_TEXT: ${{ steps.fetch_metadata.outputs.readme }}
           GITHUB_URL: ${{ steps.extract_url.outputs.url }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          cat << 'EOF' > prompt.txt
-          Generate a YAML file that follows this exact structure, providing only the YAML content without any comments or explanations:
-
-          id: lowercase_repository_name
-          title: RepositoryName - Brief one-line description
-          tags:
-            - primary_purpose_1
-            - primary_purpose_2
-            - secondary_purpose_1
-            - secondary_purpose_2
-            - core_functionality_1
-            - core_functionality_2
-            - core_functionality_3
-            - core_functionality_4
-            - technical_feature_1
-            - technical_feature_2
-            - technical_feature_3
-            - technical_feature_4
-            - security_feature_1
-            - security_feature_2
-            - security_feature_3
-            - security_feature_4
-          references:
-            - repository_url
-            - additional_urls
-          description: Single paragraph description without any YAML special characters or formatting indicators
-          why_not: 
-            - Alternative tool suggestion or empty
-
-          Tag Generation Rules:
-          - Include at least 15 specific, descriptive tags in a flat list
-          - Always include core protocols (e.g., smb, ldap, http)
-          - Always include the programming language
-          - Include authentication methods when relevant
-          - Include specific technical capabilities
-          - Add security features and protocols
-          - Include operational characteristics (e.g., threaded, async)
-          - Add implementation and deployment details
-          - Include integration capabilities
-          - Add usage patterns and contexts
-
-          General Rules:
-          - Generate pure YAML only, no meta-comments or notes
-          - No empty lines at start or end
-          - No YAML block indicators (>, |, etc.)
-          - No quotes unless absolutely necessary
-          - Keep title as a single continuous line
-          - Description should be a single paragraph without line breaks
-          - Tags must be in a simple flat list without categories
-          EOF
-          
-          # Create request body for Gemini API using jq
-          REQUEST_JSON=$(jq -n \
-            --arg system "You are a YAML generator that produces only pure YAML content. Do not include any explanatory text, comments, or notes about formatting. Output raw YAML content directly without any wrapper text or meta-commentary." \
-            --arg prompt "$(cat prompt.txt)" \
-            --arg name "$REPO_NAME" \
-            --arg desc "$REPO_DESC" \
-            --arg readme "$README_TEXT" \
-            --arg url "$GITHUB_URL" \
-            '{
-              systemInstruction: {
-                parts: [{ text: $system }]
-              },
-              contents: [{
-                parts: [{ text: ($prompt + "\n\nRepository name: " + $name + "\nDescription: " + $desc + "\nREADME excerpt:\n" + $readme + "\nGitHub URL: " + $url) }]
-              }],
-              generationConfig: {
-                temperature: 0.1
-              }
-            }')
-          
-          # Make API request to Google Gemini API
-          RESPONSE=$(curl -s -H "Content-Type: application/json" \
-            -d "$REQUEST_JSON" \
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY")
-          
-          # Check for API Errors
-          if [ "$(echo "$RESPONSE" | jq -r 'has("error")')" = "true" ]; then
-            echo "::error::Gemini API Error: $(echo "$RESPONSE" | jq -r '.error.message')"
-            exit 1
-          fi
-          
-          # Extract and validate YAML content (Angepasster JSON Pfad für Gemini)
-          YAML_CONTENT=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' | sed 's/```yaml//g' | sed 's/```//g')
-          
-          # Save YAML content
-          echo "yaml_content<<EOF" >> $GITHUB_OUTPUT
-          echo "$YAML_CONTENT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Save YAML to lake directory
         if: success()
