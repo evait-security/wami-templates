@@ -1,0 +1,34 @@
+id: semgrep
+title: Semgrep - Lightweight static analysis for many languages
+tags:
+  - static-analysis
+  - sast
+  - sca
+  - secrets-scanning
+  - semantic-grep
+  - pattern-matching
+  - code-scanning
+  - ocaml
+  - python
+  - multi-language
+  - secure-guardrails
+  - coding-standards
+  - vulnerability-detection
+  - ci-cd
+  - pre-commit
+  - ide-integration
+  - open-source
+  - cli
+  - automated-testing
+  - security-automation
+  - http
+  - git
+  - json-output
+  - sarif-support
+references:
+  - https://github.com/semgrep/semgrep
+  - https://semgrep.dev
+description: Semgrep is a fast open-source static analysis tool that searches code finds bugs and enforces secure guardrails and coding standards across more than thirty languages. It functions as a semantic grep for code allowing users to find bug variants with patterns that look like source code rather than complex abstract syntax trees or regular expressions. The tool integrates into IDEs pre-commit checks and CI/CD workflows to provide immediate feedback during the development process.
+why_not:
+  - sonarqube
+  - snyk
