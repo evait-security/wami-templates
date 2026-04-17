@@ -1,0 +1,30 @@
+id: cai
+title: CAI - The framework for AI Security
+tags:
+  - cybersecurity
+  - artificial-intelligence
+  - ai-security
+  - python
+  - framework
+  - llm-security
+  - adversarial-machine-learning
+  - threat-modeling
+  - vulnerability-assessment
+  - penetration-testing
+  - automation
+  - api-integration
+  - security-testing
+  - machine-learning
+  - red-teaming
+  - prompt-injection-defense
+  - model-robustness
+  - http
+  - rest-api
+  - cli-tool
+references:
+  - https://github.com/aliasrobotics/cai
+  - https://aliasrobotics.com/cybersecurityai.php
+description: Cybersecurity AI CAI is a comprehensive framework designed to address the unique security challenges posed by artificial intelligence and large language models. It provides tools and methodologies for assessing vulnerabilities, conducting penetration tests, and implementing defensive measures against adversarial attacks in AI systems. The framework facilitates automated security evaluations and integrates with existing workflows to ensure the robustness and integrity of AI-driven applications.
+why_not:
+  - giskard
+  - garak
