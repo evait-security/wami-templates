@@ -1,0 +1,25 @@
+id: gopacket
+title: gopacket - Native Go implementation of Impacket for network protocol interaction
+tags:
+  - go
+  - smb
+  - ldap
+  - http
+  - kerberos
+  - rpc
+  - ntlm
+  - active-directory
+  - enumeration
+  - network-security
+  - penetration-testing
+  - cross-platform
+  - native-binary
+  - protocol-analysis
+  - mssql
+  - dcerpc
+  - windows-administration
+references:
+  - https://github.com/mandiant/gopacket
+description: Gopacket is a native Go implementation of the Impacket library providing a suite of tools and packages for interacting with Windows network protocols and performing Active Directory enumeration. It allows for the execution of various network attacks and protocol interactions without requiring Python dependencies by leveraging Go's cross-compilation capabilities. The framework includes numerous tools for SMB, LDAP, and other core Windows protocols designed to be compiled once and run across different environments.
+why_not:
+  - impacket
